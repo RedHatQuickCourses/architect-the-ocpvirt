@@ -1,3 +1,7 @@
-= Chapter 3
+= Reference Design and Architecture
 
-This is the home page of _Chapter 3_ in the *hello* quick course....
+This chapter covers OpenShift Virtualization reference design and architecture.
+
+Chapter goals:
+
+* Learn the reference design and architecture.

@@ -1,0 +1,23 @@
+= Micro Cluster
+
+* This cluster size is comprised of:
+** A three (3) node OpenShift cluster
+** Control plane running on three (3) nodes
+** Storage and compute running on all three (3) nodes with compute
+** Example node size:
+*** CPU: 64 cores
+*** Memory: 512GiB
+*** OS Disks: 2x512GB (RAID1)
+*** Cluster Storage (ODF): 2x 8TB NVMe/SSD disks
+*** Network: 6x 25Gb NICs
+** The resulting cluster has 342 vCPU (with 4:1 overcommit), 826GiB memory, and 10.4TB storage available for workloads.
+*** 34% of compute and memory capacity is reserved for HA
+*** 10% of compute capacity is reserved for spare/burst
+*** The suggested storage capacity above reflects 65% of the capacity used
+
+[NOTE]
+The financial company’s Proof of Technology (PoT) environment fits in this Micro cluster category.
+
+The high-level design for the micro form factor cluster would look like the following:
+
+image::micro_cluster_design.png[]

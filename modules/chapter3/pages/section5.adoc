@@ -1,0 +1,23 @@
+= Medium Cluster
+
+* This cluster size is comprised of:
+** Fifteen (15) node OpenShift cluster
+** Control plane + compute running on three (3) nodes
+** Storage running on three (3) nodes with compute
+** Additional nine (9) nodes of “just” compute
+** Example node size:
+*** CPU: 64 cores
+*** Memory: 512GiB
+*** OS Disks: 2x512GB (RAID1)
+*** Cluster Storage (ODF): 8x 8TB NVMe/SSD disks
+*** Network: 6x 25Gb NICs
+** The resulting cluster has 2345 vCPU, 5177GiB memory, and 41.6 TB storage available for workloads.
+*** 10% of compute and memory capacity is reserved for HA
+*** 10% of compute capacity is reserved for spare/burst
+*** The suggested storage capacity above reflects 65% of the capacity used
+
+The resulting cluster has three node types (compute, compute + storage, compute + control plane) which contribute capacity for hosting virtual machines in addition to their shared purpose (ODF or control plane).
+
+Here is a high-level design for the medium form factor cluster:
+
+image::medium_cluster_design.png[]

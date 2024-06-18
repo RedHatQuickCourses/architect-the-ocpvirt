@@ -1,0 +1,24 @@
+= Large Cluster
+
+* Scale the medium design further, taking into consideration that we may consider non-converged storage based on use cases and cluster architectures:
+** Control plane running on three (3) nodes
+** Storage running on a minimum of 3 nodes with compute
+** Compute running on all nodes
+** Scale storage nodes in increments of four, which aligns with ODF entitlements of
+256TB raw storage
+** Scale compute nodes in increments of one (1)
+
+[WARNING]
+We do recommend that when deploying OpenShift Virtualization, failure domains are also defined at the physical architecture layer when possible to provide better resiliency.
+Topology labels can be applied to nodes and used by VMs and containerized applications to spread across failure domains.
+A few examples of spreading across failure domains are:
+
+* Use a multi-rack topology (at least 3), distributing the roles across the multiple racks
+* Each rack is a failure domain
+* Deploy a CLOS Leaf-Spine architecture, where each rack is contained within a Leaf
+* For more information, check the following references:
+https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#node-labels
+https://kubernetes.io/docs/reference/labels-annotations-taints/#topologykubernetesioregion
+
+[NOTE]
+The financial company’s final cluster design will fit into the Large category.

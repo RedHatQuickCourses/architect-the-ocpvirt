@@ -1,3 +1,7 @@
-= Section 2
+= Physical Cluster Design
 
-This is _Section 2_ of _Chapter 3_ in the *hello* quick course....
+In the absence of known sizing for compute and storage resources, Red Hat recommends using a modular approach to node sizing based on the expected initial capacity requirements, with the ability to scale up to 100+ hypervisor nodes in a single OpenShift deployment. OpenShift Virtualization supports many different node and cluster configurations. In the absence of known sizing requirements, the sizing below represents a starting point for an OpenShift deployment; however, node sizes and configurations should be tailored to meet your requirements as needed.
+
+Here is a graphical representation of the different node types as part of this solution:
+
+image::physical_cluster_design.png[]
