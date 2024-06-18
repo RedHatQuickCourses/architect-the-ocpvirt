@@ -1,3 +1,7 @@
-= Section 1
+= Review of current VM environment
 
-This is _Section 1_ of _Chapter 1_ in the *hello* quick course....
+== Scenario
+
+A well established company in financial services asked Red Hat to support the migration of their current virtual machine (VM) workloads away from the current VMware environment to Red Hat OpenShift Virtualization. A financial company’s Operations and Infrastructure (O&I) team and executive sponsors met with Red Hat Consulting for three days of discovery sessions to assess their current VM portfolio. As part of these sessions, the Red Hat team proposed an approach to migrate away from their current virtualization platform and adopt OpenShift Virtualization. During these sessions Red Hat team asked questions about the existing VMware vSphere environment.
+
+Let's find out the questions were asked and discussed during these sessions in next section.

@@ -1,4 +1,78 @@
-= Section 3
+= Current Environment
 
-This is _Section 3_ of _Chapter 1_ in the *hello* quick course....
+The Red Hat team asked a few questions from previous section, specific to the company's current environment to get an idea of their existing infrastructure. Financial company’s infrastructure consists of more than 75,000 virtual machines (VMs) distributed across data centers in seven countries.
 
+* These VMs can be categorized into four main types:
+** Production: 28,000 VMs
+** Non-production: 31,000 VMs
+** Management: 8,000 VMs
+** Virtual Desktop Infrastructure (VDI): 6,000 VMs
+
+Approximately 19,000 VMs are under the responsibility of the Operations and Infrastructure (O&I) team while the remaining VMs are owned by various product teams within the organization. Out of 75,000 VMs, 69,000 VMs can be potentially migrated to a new platform.
+
+== Infrastructure Tools
+
+[cols="1,1,1"]
+|===
+| Category | Current Tools | Future Tools
+
+| Hypervisor Guest Info Tools
+| vmware-tools
+| qemu-guest-agent
+
+| Day1 Provisioning Automation
+| ServiceNow > vCenter and ESXi
+| Update ServiceNow to communicate with Openshift API
+
+| Day1 VM Customization
+| ServiceNow + Ansible playbooks
+| Unchanged
+
+| Day2 VM Operations
+| ServiceNow > vCenter and ESXi
+| Update ServiceNow to communicate with Openshift API
+
+| Day2 Guest OS Operations
+| ServiceNow + Ansible playbooks, Chef
+| Unchanged
+
+| Monitoring and Logging
+| Opera (GEM) with Prometheus Remote-Writes, Splunk, Wazuh
+| Unchanged. Openshift runs a local Prometheus instance to remote write. Openshift Logging Operator can forward to Splunk.
+
+| Metrics, Alerts and Notification
+| vROps, Netcool NMS, node-exporter, BMC TrueSight/BCO
+| Openshift does not generate SNMP Traps, but it does send Prometheus ALERTS, which can be configured to notify.
+
+| Backups and Recovery
+| Fulls: Netbackup Agent-based
+
+Snapshots: Rubrik, Cohesity
+| Agent-based backups are unchanged.
+
+Snapshot-based backups will be one of the existing solutions decided by further evaluation of OpenShift support.
+
+| Security in Template/Image
+| NA
+| Incorporate vulnerability scan as part of CI pipeline for VM images
+
+
+| Security in VM/Container
+| Qualys
+| Qualys (VMs)
+
+AquaSec (containers)
+
+
+| Secrets and Certificates
+| Internal CA
+Venafi
+Hashicorp Vault
+| Unchanged for workloads.
+
+Cert-manager recommended to manage infrastructure certificates.
+
+| Authentication and Authorization
+| LDAPS (AD)
+|Unchanged.
+|===

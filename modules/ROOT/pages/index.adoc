@@ -1,6 +1,35 @@
-= An Example Quick Course
+= Architect the OpenShift Virtualization
 :navtitle: Home
 
-== Introduction
+Welcome to this quick course, _Architect the OpenShift Virtualization_.
+This quick course is a part of a series of courses about Migrate Applications and VM workloads from VMware to OpenShift Virtualization.
 
-This is an example quick course demonstrating the usage of Antora for authoring and publishing quick courses.
+== Authors
+
+The PTL team acknowledges the valuable contributions of the following Red Hat associates:
+
+* Andrew Sullivan
+* Ken Savich
+* Laura Thain
+* Daniel Trieu
+* Sarvesh Pandit
+* David Fellerath
+
+== Prerequisites
+
+For this course, you should have:
+
+* RHCSA or higher is helpful for the navigation and usage of the command line, but it is not required.
+* https://developers.redhat.com/learn/rhel/container-fundamentals[Container Fundamentals]
+* https://developers.redhat.com/learn/openshift/foundations-openshift[Foundations of OpenShift]
+
+== Objectives
+
+The overall objectives of this course include:
+
+* Determine the requirements of OpenShift Virtualization for migration
+* Design and Configure the OpenShift Virtualization to host workloads that may currently reside on VMware vSphere
+
+== References
+
+https://access.redhat.com/articles/7067871[OpenShift Virtualization - Reference Implementation Guide]

@@ -1,5 +1,5 @@
-name: placeholder-course-name
-title: Placeholder Course Title
+name: Red Hat OpenShift Virtualization - Architect the OpenShift Virtualization
+title: Architect the OpenShift Virtualization
 version: 1
 nav:
 - modules/ROOT/nav.adoc

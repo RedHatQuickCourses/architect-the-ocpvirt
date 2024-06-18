@@ -1,6 +1,6 @@
 site:
-  title: Placeholder Course Title
-  start_page: placeholder-course-name::index.adoc
+  title: Architect the OpenShift Virtualization
+  start_page: Red Hat OpenShift Virtualization - Architect the OpenShift Virtualization::index.adoc
 
 content:
   sources:

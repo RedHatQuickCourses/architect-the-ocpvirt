@@ -1,3 +1,7 @@
-= Chapter 1
+= Requirements of OpenShift Virtualization for Migration
 
-This is the home page of _Chapter_ 1 in the *hello* quick course...
+This chapter covers getting the existing VMware vSphere environment details and finding out the requirements of OpenShfit virtualization for migration.
+
+Chapter goals:
+
+* Determine the requirements of OpenShift Virtualization for migration.

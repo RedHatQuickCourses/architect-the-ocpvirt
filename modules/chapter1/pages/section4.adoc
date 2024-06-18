@@ -1,0 +1,194 @@
+= Workload Migration Complexity Analysis
+
+== Approach
+
+Categorizing workload complexity will help us prioritize the migration plans and give us an estimate of the effort. We base our evaluation on the following:
+
+* Workload environment
+* Operating System and Version
+* Workload Type
+* Resource Capacity and Requirement
+* Disk Size
+
+== Workload Environment
+
+* Prioritizing lab and nonproduction workloads for migration will help ensure that we perform production migration as efficiently and smoothly as possible.
+* RHEL and other Linux Distributions
+* Out of the 69,000 eligible workloads from VMware, we first categorize the VMs into supported operating systems and version or not.
+You can refer the article on certified guest operating systems - https://access.redhat.com/articles/973163[Certified Guest Operating Systems in Red Hat OpenStack Platform, Red Hat Virtualization, Red Hat OpenShift Virtualization and Red Hat Enterprise Linux with KVM]
+* RHEL and RHEL-derivatives such as CentOS, Rocky and Oracle Linux that are newer than RHEL 5 will be placed into the easy bucket.
+These versions are heavily tested and officially supported by Red Hat.
+The older versions will require upgrades before migration so they will be placed in the medium bucket.
+* SUSE is also a supported distribution starting with version 12+.
+* Debian and Ubuntu are not supported distributions, but are considered Technology Preview.
+We will place these in the hard bucket.
+* Various Linux VMs with unlabelled distribution will need to be determined by other means.
+The effort level will be determined on a case-by-case basis.
+
+[cols="1,1,1,1"]
+|===
+| Operating Systems | Easy | Medium | Hard
+
+| RHEL 5
+| -
+| 41
+| -
+
+| RHEL 6, 7, 8, 9
+| 53521
+| -
+| -
+
+| CentOS 4, 5
+| -
+| 73
+| -
+
+| CentOS 6, 7, 8
+| 683
+| -
+| -
+
+| Oracle Linux 4, 5
+| -
+| 13
+| -
+
+| Oracle Linux 7, 8
+| 53
+| -
+| -
+
+| Rocky Linux 8, 9
+| 3790
+| -
+| -
+
+| SUSE 11
+| -
+| -
+| 7
+
+| SUSE 12, 15
+| -
+| 21
+| -
+
+| Ubuntu 18, 20, 22, 24
+| -
+| -
+| 739
+
+| Debian 8, 9, 10
+| -
+| -
+| 35
+
+| Other Linux
+(kernel 2.6+)
+| -
+| -
+| 926
+
+| Total | 58047 | 148 | 1707
+|===
+
+== Windows
+
+Microsoft Windows and Microsoft Windows Servers are certified by Microsoft SVVP to run on Openshift Virtualization’s KVM hypervisor.
+The drivers will need to be changed out to virtio, so that increases the challenge.
+We assume these Windows VMs run on the VMware hypervisor and are possible to migrate.
+If they are running on Hyper-V, Red Hat does not have a direct migration solution from Hyper-V to Openshift Virtualization.
+
+[cols="1,1,1,1"]
+|===
+| Operating Systems | Easy | Medium | Hard
+
+| Windows 10
+| -
+| 8631
+| -
+
+| Windows Server
+2016, 2019, 2022
+| -
+| 467
+| -
+
+| Total | 0 | 9098 | 0
+|===
+
+== Workload Type
+
+We call out Database, Message Bus, Hadoop, and Observability VMs as having higher complexity to migrate due to required persistence of objects in their runtime.
+They will be required to be quiesced and written to disk before migrating.
+
+[cols="1,1,1,1"]
+|===
+| Workload Type | Easy | Medium | Hard
+
+| Low Complexity Types; App & Web Servers, Frameworks, etc.
+| 52763
+| -
+| -
+
+| Database
+| -
+| 8765
+| -
+
+| Message Bus
+| -
+| 2168
+| -
+
+| Hadoop VMs
+| -
+| 427
+| -
+
+| Observability
+| -
+| 274
+| -
+
+| Total | 52763 | 11634 | 0
+|===
+
+== Resource Requirements
+
+CPU and Memory requirements will limit what we can send to each cluster.
+The financial company has a requirement that we utilize no more than 80% of the total physical memory and overcommit more than 4:1 vCPUs to physical CPUs.
+Additionally, two nodes of the cluster cannot be counted in the total available resources.
+They are assigned solely to handle node failures.
+
+== Disk Size
+The size of the VM disk affects the time to copy the vdmk to the cluster and the time it takes to convert the disk.
+These are controlled by the migration network bandwidth and the CPUs available during conversion.
+
+[cols="1,1,1,1"]
+|===
+| Disk Size (TB) | Easy | Medium | Hard
+
+| 1-2 TB
+| 67563
+| -
+| -
+
+| 3-9 TB
+| -
+| 3672
+| -
+
+| 10-20 TB
+| -
+| -
+| 104
+
+| 21-40 TB
+| -
+| -
+| 68
+
+| Total | 67563 | 3672 | 172
+|===
