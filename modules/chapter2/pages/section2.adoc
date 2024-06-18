@@ -1,0 +1,30 @@
+= Pilot Foundation
+
+The pilot lays out the pathway for migration by preparing infrastructure, evaluating workloads, developing procedures and providing training. Then we execute the migration of an initial batch of VMs that exercise the strategies, automation and procedural approach.
+
+== Workstreams and Tasks
+
+* OpenShift Infrastructure Workstream
+** Infrastructure low-level design
+** GitOps automation for infrastructure
+** OpenShift deployments
+** Process and automation for host recommissioning
+* VM Migration Workstream
+** Workload information gathering
+** Process / strategy identification
+** Migration validation with real workloads
+* Platform Operationalization Workstream
+** Metrics
+** Dashboards to replace vRealize Operations
+** Logging
+** Alarming
+** Operations team training / enablement
+
+== Outputs
+
+* One lab environment (carried over from PoT)
+* Non-production environment
+* One to three datacenters with Production environments
+* Automation for ESXi host to OpenShift reprovisioning
+* Initial automation for VM migrations tested with pilot workloads
+* ServiceNow able to provision new workloads to OpenShift Virtualization

@@ -1,3 +1,18 @@
-= Section 1
+= Virtualization Migration Assessment
 
-This is _Section 1_ of _Chapter 2_ in the *hello* quick course....
+The Virtualization Migration Assessment ensures that Red Hat’s knowledge of Openshift (OCP), Openshift Virtualization (OCP-Virt), Migration Toolkit for Virtualization (MTV) and other technologies are properly communicated and demonstrated with the financial company.
+The financial company will ensure that enterprise knowledge of the environment, their requirements, and goals are properly communicated.
+
+== Tasks
+
+* The financial company provided an in-depth review of their current environment, problems with their current environment, and their desired future environment.
+* Red Hat demoed Openshift, Openshift Virtualization, and the Migration Toolkit for Virtualization.
+* Red Hat provided an in-depth review of the relevant technology and tools and proposed a HLD to meet the financial company’s virtualization migration goals.
+
+== Outputs
+
+* Near and long-term goals
+* Proof of Technology (PoT) environment requirements
+* Proposed Architecture and Bill of Materials for Pilot Phase
+* Procurement estimates for Pilot infrastructure build
+

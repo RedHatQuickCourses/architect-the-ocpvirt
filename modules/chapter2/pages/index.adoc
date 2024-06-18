@@ -1,3 +1,7 @@
-= Chapter 2
+= Recommended Migration Approach
 
-This is the home page of _Chapter 2_ in the *hello* quick course....
+This chapter covers recommended workloads/VMs migration approach.
+
+Chapter goals:
+
+* Learn the recommended migration approach.

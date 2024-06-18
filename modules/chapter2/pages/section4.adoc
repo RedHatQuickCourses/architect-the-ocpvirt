@@ -1,0 +1,48 @@
+= Proof of Technology (PoT) Environment
+
+== Overview
+
+Prior to beginning the pilot phase in earnest, a proof of technology environment will be implemented by the financial company's team with support from Red Hat. This environment will prove the reliability of the proposed cluster architecture as it would be implemented inside of the financial company's network and datacenter constraints. The environment will also be retained to serve as  the infrastructure sandbox or lab environment where configurations and automations can be developed, tested, and evaluated for security and compliance.
+
+image::PoT_environment.png[]
+
+== Foundation Cluster
+
+This cluster will host the control plane pods for the workload cluster(s) in the PoT environment as well as other management tooling as needed. The management tools expected to be installed for PoT evaluation are Advanced Cluster Management for Kubernetes (ACM), Ansible Automation Platform (AAP), OpenShift GitOps, and OpenShift cert-manager Operator or functional equivalents.
+Combining OpenShift control planes and management workloads onto a foundation cluster in this manner minimizes the overhead of OpenShift when running large numbers of clusters and provides a single point of management for performing deployment and maintenance of the OpenShift clusters within a datacenter or pod.
+
+=== Hardware
+
+The foundation cluster will consist of three physical nodes deployed across failure domains (racks). While smaller nodes can be used for the PoT environment, the proposed architecture calls for foundation cluster nodes to be similar in sizing to the workload cluster nodes and existing vSphere hypervisors to improve control plane density. Existing vSphere nodes can be repurposed for this use case provided they meet the local storage requirements below.
+
+=== Networking
+
+Assuming existing hardware is repurposed, each foundation cluster node will have four network interfaces consisting of two slower interfaces (1G) and two fast interfaces (10/25G). The two slower interfaces should be configured as a bonded pair connected to the out of band (OOB) management network to facilitate virtual media provisioning of servers. The two faster interfaces should be configured as a bonded pair connected to the management network within the VMSN zone. This interface will carry the control plane traffic for the workload clusters and traffic for the management tools.
+An LACP-based link aggregation configuration (MLAG or vPC) is recommended for the bonded interfaces but less important for the slower interfaces than the faster interfaces.
+Each server is also expected to have an OOB management interface which will be used for operating system provisioning and also for fencing to expedite workload recovery in the event of a node failure. If this OOB network is not in the VMSN zone, then firewall rules will be needed to allow access from the management network to the OOB interfaces by HTTPS and vice-versa.
+
+=== Storage
+
+Unlike the workload clusters, the foundation cluster will primarily depend on local flash storage for storing persistent control plane data. This provides improved performance for etcd as well as protection of the control planes in the event of an outage to the shared storage. The control plane workloads replicate state across the failure domains in the foundation cluster to provide resilience.
+This local storage should consist of one or more solid state disks (ideally NVMe-based) in each foundation cluster in addition to their mirrored boot disks. 
+
+== Workload Clusters
+
+The initial PoT environment should have one workload cluster. The workload cluster will run the actual virtual machine workloads in OpenShift Virtualization as well as the Migration Toolkit for Virtualization components to migrate virtual machines from the vSphere environment.
+Additional workload clusters may be created in the environment by adding additional physical servers managed by the foundation cluster. While virtualized workload clusters are supported by this architecture, they are out of scope for the initial virtual machine migration effort.
+
+=== Hardware
+
+The number of servers required for a viable workload cluster depends on the desired separation of failure domains. The cluster may be deployed across two or three failure domains as desired. If storage is shared across the failure domains then one physical node is required per failure domain. If storage is isolated (i.e. SPOF A and SPOF B) then two physical nodes are required per failure domain to evaluate all platform functionality.
+Each server should be equivalent in hardware to existing vSphere hypervisor hosts and existing hosts may be repurposed for this use case.
+
+=== Networking
+
+Assuming existing hardware is repurposed, each foundation cluster node will have four network interfaces consisting of two slower interfaces (1G) and two fast interfaces (10/25G). The two slower interfaces should be configured as a bonded pair connected to the management network within the VMSN zone. The management network will carry control plane and system agent traffic from the OpenShift host. The two faster interfaces should be configured as a bonded pair acting as a trunked connection for storage, migration, and virtual machine VLAN segments.
+An LACP-based link aggregation configuration (MLAG or vPC) is recommended for the bonded interfaces but less important for the slower interfaces than the faster interfaces.
+Each server is also expected to have an OOB management interface which will be used for operating system provisioning and also for fencing to expedite workload recovery in the event of a node failure. If this OOB network is not in the VMSN zone, then firewall rules will be needed to allow access from the management network to the OOB interfaces by HTTPS and vice-versa.
+
+=== Storage
+
+The workload cluster nodes will only need a small (120 GB minimum) pair of mirrored solid state disks for operating system and pod ephemeral storage use. The minimum supported size is suitable for a mostly standard OpenShift deployment provisioning virtual machines using images stored on remote storage; however additional space may be needed if many third-party agents are used or if container images are used to distribute virtual machine disk “golden” images. That additional space will depend on the size of the additional images to be stored in ephemeral storage.
+Storage for virtual machine workloads is assumed to be Dell PowerFlex or other remote storage accessed over the IP network. If converged storage is desired for testing vSAN-style deployments, then additional solid state disks should be added for OpenShift Data Foundation (ODF).
