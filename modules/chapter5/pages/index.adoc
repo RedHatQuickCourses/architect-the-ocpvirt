@@ -1,7 +1,8 @@
-= Reference Design and Architecture
+= Additional Features
 
-This chapter covers OpenShift Virtualization reference design and architecture.
+This chapter covers additional features for implementation to support virtual machines and applications. It also covers the resource capacity calculations.
 
 Chapter goals:
 
-* Learn the reference design and architecture.
+* Deploy and configure additional features to support virtual machines and applications.
+* Learn to calculate resource capacity.

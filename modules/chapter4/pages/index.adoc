@@ -4,4 +4,4 @@ This chapter covers cluster deployment configuration and post-install configurat
 
 Chapter goals:
 
-* Deploy and configure OpenShift Features to support virtual machines and applications.
+* Deploy and configure OpenShift features to support virtual machines and applications.

@@ -1,1 +1,27 @@
 = Cluster Deployment Configuration
+
+Using the previously explained cluster geometry as a starting point, the OpenShift cluster(s) need to have features and functions configured to provide capabilities for supporting the deployment and management of virtual machines, along with value-add capabilities for virtualized applications.
+This section will describe the recommended OpenShift configuration for hosting virtual machines.
+
+== Installer Provision Infrastructure (IPI)
+
+This architecture uses the installer provisioned infrastructure (IPI) method for deploying the cluster.
+The resulting cluster will have the baremetal cloud provider configured and will be able to make use of it for adding and managing nodes. For more information on IPI-based bare metal installations, please see the documentation https://docs.openshift.com/container-platform/4.15/installing/installing_bare_metal_ipi/ipi-install-overview.html[here].
+
+For the suggested cluster designs in this reference architecture, the control plane should be schedulable. When instantiating the cluster, deploy a three node “compact” cluster, which will mark the control plane nodes as schedulable by default.
+After deployment, https://docs.openshift.com/container-platform/4.15/scalability_and_performance/managing-bare-metal-hosts.html#adding-bare-metal-host-to-cluster-using-web-console_managing-bare-metal-hosts[join additional compute and storage nodes] as needed, https://docs.openshift.com/container-platform/4.15/post_installation_configuration/cluster-tasks.html#machineset-creating_post-install-cluster-tasks[using distinct MachineSets for each role], e.g. storage and compute.
+
+== Red Hat Enterprise Linux CoreOS (RHCOS)
+
+OpenShift Virtualization requires Red Hat Enterprise Linux CoreOS (RHCOS) compute nodes.
+Even though it is possible to deploy and use Red Hat Enterprise Linux (RHEL) compute nodes, they are incompatible with OpenShift Virtualization.
+RHCOS is based on RHEL and designed to run containers with an integrated CRI-O runtime and dedicated container tools.
+The operating system uses rpm-ostree to facilitate being managed through the Machine Config Operator to deploy operating system updates and apply configuration declaratively.
+
+To customize RHCOS, for example, to add drivers or other third-party OS-level tools, the https://docs.openshift.com/container-platform/4.15/post_installation_configuration/coreos-layering.html[RHCOS] image layering feature must be used to modify the operating system and add the appropriate packages.
+
+For more information on Red Hat Enterprise Linux CoreOS, https://docs.openshift.com/container-platform/4.14/architecture/architecture-rhcos.html[see the documentation].
+
+== Bonded NICs for management and SDN
+
+The initial bond interface, consisting of two adapters bonded together with an IP address on the machine network specified and configured at install time, is used for the SDN, management traffic between the node and the control plane (and administrator access), and live migration traffic. During installation, use the https://docs.openshift.com/container-platform/4.15/installing/installing_bare_metal_ipi/ipi-install-installation-workflow.html#configuring-host-network-interfaces-in-the-install-config-yaml-file_ipi-install-installation-workflow[host network interface configuration options] to configure the bond and set the IP address needed.

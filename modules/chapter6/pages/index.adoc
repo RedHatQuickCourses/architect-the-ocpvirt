@@ -1,0 +1,6 @@
+= OpenShift Virtualization Sizing for Virtual Machines
+
+This chapter covers
+
+Chapter goals:
+

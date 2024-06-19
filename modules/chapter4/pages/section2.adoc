@@ -1,1 +1,262 @@
 = Post-install Configuration
+
+After the OpenShift cluster has been deployed, with additional nodes joined for compute and storage roles, additional cluster configuration is needed to adjust and optimize the configuration for virtual machines.
+
+== OpenShift Virtualization Operator configuration
+
+OpenShift Virtualization is deployed and configured in the cluster using OperatorHub.
+Once installed, there are several configuration options to set.
+
+Follow https://docs.openshift.com/container-platform/4.15/virt/install/installing-virt.html[the documentation] for deploying the Operator and creating an instance of the HyperConverged resource.
+The below bullets represent common decisions and configuration parameters that are not default.
+
+Decide whether to download the default, Red Hat provided, operating system images.
+The Operator will automatically retrieve and make available cloud images for RHEL, Fedora, and CentOS when a default storage class is configured.
+If you do not intend to use these images, it is recommended to disable automatically retrieving them.
+
+image::ocpvirt_op_config1.png[]
+
+Configure the default CPU model to the lowest common denominator CPU model in the cluster.
+These values are determined by the CPU vendor and the highest, or lowest, CPU model available in the OpenShift cluster.
+For AMD CPUs, a value of EPYC is recommended, for Intel CPUs a value equivalent to the generation name, e.g.
+
+image::ocpvirt_op_config2.png[]
+
+If you do not want to use the default storage class for storing VM state related to, among other things, vTPM, set the desired storage class when deploying OpenShift Virtualization. This storage class must support RWX access mode.
+
+image::ocpvirt_op_config3.png[]
+
+== Machine and node configuration
+
+These tasks represent configurations applied to the cluster nodes after the cluster is deployed.
+
+https://docs.openshift.com/container-platform/4.15/post_installation_configuration/machine-configuration-tasks.html#installation-special-config-chrony_post-install-machine-configuration-tasks[Configure time synchronization] to avoid clock drift and issues related to inaccurate/inconsistent time, such as certificates being incorrectly marked invalid.
+
+Configure node health checks and fence agents remediation for reduced HA recovery time in the event of node failure.
+
+The https://access.redhat.com/documentation/en-us/workload_availability_for_red_hat_openshift/23.2/html-single/remediation_fencing_and_maintenance/index?extIdCarryOver=true&sc_cid=701f2000001OH74AAG#installing-node-health-check-operator-using-web-console_node-health-check-operator[Node Health Check Operator] and https://access.redhat.com/documentation/en-us/workload_availability_for_red_hat_openshift/23.3/html/remediation_fencing_and_maintenance/fence-agents-remediation-operator-remediate-nodes#installing-fence-agents-remediation-operator-using-web-console_fence-agents-remediation-operator-remediate-nodes[Fence Agents Remediation Operator] are deployed from OperatorHub in the web console.
+Once installed an instance of the https://access.redhat.com/documentation/en-us/workload_availability_for_red_hat_openshift/23.3/html/remediation_fencing_and_maintenance/fence-agents-remediation-operator-remediate-nodes#configuring-fence-agents-remediation-operator_fence-agents-remediation-operator-remediate-nodes[FenceAgentsRemediationTemplate must be created] to provide BMC connection information for the nodes.
+This is the same information that was used when deploying the cluster and joining nodes using a MachineSet.
+Finally, https://access.redhat.com/documentation/en-us/workload_availability_for_red_hat_openshift/23.3/html/remediation_fencing_and_maintenance/node-health-check-operator#about-node-health-check-operator_node-health-check-operator[create an instance of the NodeHealthCheck] to define appropriate timeout values for your desired VM recovery time.
+Refer to the chart in https://access.redhat.com/articles/7057929[this KCS] for details on how different values affect the recovery times.
+
+== Additional dedicated network interfaces for traffic types
+
+The suggested hardware configuration used in this reference architecture has six network adapters configured in three pairs of two LACP bonds.
+The following is a sample NMstate configuration making use of two adapters on the host to create a bonded interface in the LACP (802.1ad) run mode.
+
+[source,yaml,subs="+quotes"]
+----
+apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  annotations:
+    description: a bond for VM traffic and VLANs
+  name: bonding-policy
+spec:
+  desiredState:
+    interfaces:
+      - link-aggregation:
+          mode: 802.3ad
+          port:
+            - enp6s0f0
+            - enp6s0f1
+        name: bond1
+        state: up
+        type: bond
+----
+
+The bonds are intended to be used for isolating network traffic for different purposes.
+This provides the advantage of avoiding noisy neighbor scenarios for some interfaces that may have a large impact, for example a backup for a virtual machine consuming significant network throughput impacting ODF or etcd traffic on a shared interface.
+
+Management, SDN, and live migration - this is the interface configured during installation, with an IP on the machine network CIDR. OpenShift will configure the SDN on this interface, and it is the interface expected to be used for node-to-control plane communication.
+
+Additionally, by default, OpenShift Virtualization uses this interface for live migration traffic.
+This has the benefit of the traffic being encrypted in transit; however, if SDN throughput is constrained, or other workloads would be impacted, then using a different network, such as one shared with the IP-base storage, for live migration traffic.
+
+IP-based storage - this is the interface which will be used for two purposes in this reference architecture.
+Using additional isolation, such as VLANs, on this interface is possible, but not required.
+
+First, it is the interface expected to be used for mounting iSCSI, NFS, and RBD volumes used by virtual machine disks.
+If the node IPs and the storage system are not in the same broadcast domain (i.e. L2 adjacency) then additional route rules may need to be created using NMstate to ensure that traffic to the storage system utilizes this interface.
+
+Second, for deployments using ODF, this is the interface to be used for ODF replication traffic.
+
+Virtual machine traffic - this interface will be configured with an OVS bridge to attach virtual machines.
+For each VLAN used by virtual machines, an OVN secondary network NetworkAttachmentDefinition is created using the localnet topology and a VLAN identifier.
+NetworkAttachmentDefinitions are created in the default namespace for use by all other namespaces, or in specific namespaces to provide RBAC controls for network connectivity.
+
+An example configuration for VM network connectivity is below, note that the bond configuration should be a part of the same NodeNetworkConfigurationPolicy to ensure they are configured together.
+
+[source,yaml,subs="+quotes"]
+----
+apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: ovs-br1-vlan-trunk
+spec:
+  nodeSelector:
+    node-role.kubernetes.io/worker: ''
+  desiredState:
+    interfaces:
+    - name: ovs-br1
+      description: |-
+        A dedicated OVS bridge with bond2 as a port
+        allowing all VLANs and untagged traffic
+      type: ovs-bridge
+      state: up
+      bridge:
+        allow-extra-patch-ports: true
+        options:
+          stp: true
+        port:
+        - name: bond2
+    ovn:
+      bridge-mappings:
+      - localnet: vlan-2024
+        bridge: ovs-br1
+        state: present
+      - localnet: vlan-1993
+        bridge: ovs-br1
+        state: present
+---
+apiVersion: k8s.cni.cncf.io/v1
+kind: NetworkAttachmentDefinition
+metadata:
+  annotations:
+    description: VLAN 2024 connection for VMs
+  name: vlan-2024
+  namespace: default
+spec:
+  config: |-
+    {
+      "cniVersion": "0.3.1",
+      "name": "vlan-2024",
+      "type": "ovn-k8s-cni-overlay",
+      "topology": "localnet",
+      "netAttachDefName": "default/vlan-2024",
+      "vlanID": 2024,
+      "ipam": {}
+    }
+---
+apiVersion: k8s.cni.cncf.io/v1
+kind: NetworkAttachmentDefinition
+metadata:
+  annotations:
+    description: VLAN 1993 connection for VMs
+  name: vlan-1993
+  namespace: default
+spec:
+  config: |-
+    {
+      "cniVersion": "0.3.1",
+      "name": "vlan-1993",
+      "type": "ovn-k8s-cni-overlay",
+      "topology": "localnet",
+      "netAttachDefName": "default/vlan-1993",
+      "vlanID": 1993,
+      "ipam": {}
+    }
+----
+
+== Kubelet configuration
+
+The following additional configuration for kubelet is applied after the cluster is deployed.
+
+Increase https://docs.openshift.com/container-platform/4.15/post_installation_configuration/node-tasks.html#create-a-kubeletconfig-crd-to-edit-kubelet-parameters_post-install-node-tasks[kubelet] **kubeAPIBurst** to 200 and **kubeAPIQPS** to 100.
+Adjusting these values up from the default of 100 and 50, respectively, accommodates bulk object creation on the nodes.
+The lower values are useful on clusters with smaller nodes to keep API server resource utilization reasonable, however with larger nodes this is not an issue.
+
+Set the **maxPods** per node to 500.
+By default, OpenShift sets the maximum Pods per node to 250.
+This value affects not just the Pods running core OpenShift services and node functions but also virtual machines.
+For large virtualization nodes that can host many virtual machines, this value is likely too small.
+If you’re using very large nodes and may have more than 500 VMs and Pods on a node, this value can be increased beyond 500, however you will also need to adjust the size of the cluster network’s host prefix when deploying the cluster.
+
+Disable **nodeStatusMaxImage**.
+The scheduler factors both the count of container images and which container images are on a host when deciding where to place a Pod or virtual machine.
+For large nodes with many different Pods and VMs, this can lead to unnecessary and undesired behavior.
+Disabling the imageLocality scheduler plugin by setting **nodeStatusMaxImage** to **-1** facilitates balanced scheduling across cluster nodes, avoiding scenarios where VMs are scheduled to the same host as a result of the image already being present vs factoring in other resource availability.
+
+https://docs.openshift.com/container-platform/4.15/nodes/nodes/nodes-nodes-resources-configuring.html#nodes-nodes-resources-configuring-auto_nodes-nodes-resources-configuring[Set dynamic resource allocation for kubelet].
+The default CPU and memory reservation for kubelet is very small and not appropriate for nodes with large amounts of resources, such as hypervisor hosts.
+Setting dynamic resource allocation will set the values for system reserved CPU and memory according to the total amount of resources on the node.
+This prevents kubelet from starving for resources when the node has high numbers of Pods and virtual machines running.
+
+https://docs.openshift.com/container-platform/4.15/scalability_and_performance/using-cpu-manager.html#setting_up_cpu_manager_using-cpu-manager-and-topology_manager[Configure CPU manager] to enable dedicated resources for virtual machines to be assigned.
+Without CPU manager, virtual machines using dedicated CPU scheduling, such as those configured with the cx instance type, cannot be scheduled.
+
+Configure https://docs.openshift.com/container-platform/4.15/post_installation_configuration/node-tasks.html#nodes-nodes-garbage-collection-configuring_post-install-node-tasks[soft eviction thresholds].
+Configuring soft eviction is valuable for several reasons, however the most important is that it sets the upper boundary for memory utilization on the nodes before the virtual machines are attempted to be moved to other hosts in the cluster.
+This value should be set for a reasonable value according to the approximate maximum amount of memory utilization you want on the node, however if all nodes are exceeding this value then workload will not be rescheduled.
+Depending on the amount of memory in your hosts, this could be between 90-95%. For the suggested node size in this architecture, a value of 90% is used.
+Additional eviction thresholds for local storage utilization can be configured based on needs, in particular if the disks used by RHCOS are smaller (less than 512GiB) or you intend to deploy ephemeral virtual machines with disks stored in container images.
+Below is an example kubelet configuration to apply the above suggested configuration to compute nodes in the cluster.
+If you have hypervisor hosts that do not have the “worker” label, an additional selector may be needed.
+
+[source,yaml,subs="+quotes"]
+----
+apiVersion: machineconfiguration.openshift.io/v1
+kind: KubeletConfig
+metadata:
+  name: set-virt-values
+spec:
+  machineConfigPoolSelector:
+    matchLabels:
+      pools.operator.machineconfiguration.openshift.io/worker: ""
+  kubeletConfig:
+    autoSizingReserved: true
+    maxPods: 500
+    nodeStatusMaxImages: -1
+    kubeAPIBurst: 200
+    kubeAPIQPS: 100
+    evictionSoft:
+      memory.available: "50Gi"
+    evictionSoftGracePeriod:
+      memory.available: "5m"
+    evictionPressureTransitionPeriod: 0s
+----
+
+== OpenShift Data Foundation configuration
+
+This reference architecture utilizes ODF as the storage backed for virtual machine disks.
+Storage is modular and additional CSI providers can be added to the cluster to provide both ODF and third-party storage from other vendors.
+Furthermore, ODF is not required if you choose to exclusively use RWX storage from other vendors. For non-ODF storage requirements, see the storage section in next chapter.
+
+Set global, and virtualization specific, default storage classes.
+The global default storage class is used as the default for PVCs when a specific storage class is not requested.
+For this reference architecture, when using ODF for the storage, the suggested global default is **ocs-storagecluster-ceph-rbd**.
+The virtualization specific default storage class is used when creating virtual machine disks.
+The default when using ODF should be **ocs-storagecluster-ceph-rbd-virtualization**, unless creating customized storage classes.
+Create additional storage classes as needed to customize the storage features, however ensure that the **parameters.mapOptions value krbd:rxbounce** is set for any ODF storage class used for VM disks.
+
+== Multi-network policy activation
+
+To support network policy for VMs connected to L2 networks, https://docs.openshift.com/container-platform/4.15/networking/multiple_networks/configuring-multi-network-policy.html#nw-multi-network-policy-enable_configuring-multi-network-policy[the feature needs to be enabled on the Operator].
+When using network policy to control ingress/egress traffic for virtual machines, use https://docs.openshift.com/container-platform/4.15/networking/multiple_networks/configuring-multi-network-policy.html#configuring-multi-network-policy_working-with-multi-network-policy[the MultiNetworkPolicy object] to define rules for access.
+
+== Additional Operator configuration
+
+The below Operators are suggested to be deployed and configured in the cluster to provide additional functionality.
+
+Node maintenance Operator - Simplifies the process of cordoning and draining nodes in the cluster for maintenance purposes.
+
+OpenShift logging - Collects the logs of cluster nodes, Pods, and VMs (but not the guest OS logs) into a single place for searching and troubleshooting.
+
+MetalLB - Provides the ability to expose Pod and VM-based applications using an L2 or L3 (BGP)-based load balancer hosted by OpenShift.
+This is useful for providing external access to one or more VMs connected to the SDN that are hosting an application using a non-HTTP(s) (and not using ports 80 or 443) application.
+
+https://access.redhat.com/documentation/en-us/migration_toolkit_for_virtualization/[Migration Toolkit for Virtualization] - In addition to importing virtual machines from Red Hat Virtualization, Red Hat OpenStack, and VMware vSphere to OpenShift, the Migration Toolkit for Virtualization also imports VMs from OVA format and between OpenShift clusters.
+Additionally, virtual machines from other OpenShift Virtualization clusters can be migrated to the current cluster using the migration toolkit.
+
+Migration Toolkit for Containers - Used to migrate VM disks (PVCs) between storage classes.
+
+Compliance Operator - For organizations with compliance, e.g. HIPAA or DISA STIG, requirements, the Compliance Operator reports, and optionally applies, configuration to the cluster to meet these standards.
+
+Kube Descheduler Operator - The descheduler takes action to (re)schedule workload on the cluster nodes when conditions are met. For virtualization, this will take action when nodes are below a utilization threshold, 20% by default, to reschedule VMs from highly utilized nodes, over 50% by default, with the intention of balancing overall node utilization.
+However,  the profile is currently in tech preview.
+
+https://docs.openshift.com/container-platform/4.15/scalability_and_performance/cnf-numa-aware-scheduling.html[NUMA resources Operator] - As the name implies, this Operator is used when NUMA aware workloads are deployed to the cluster.
+For VMs with large memory requirements or applications that can benefit from NUMA-aware scheduling and utilization of resources, deploying this Operator and assigning the appropriate secondary scheduler informs the nodes how to manage these workloads.
+
+https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/2.4/html/deploying_the_red_hat_ansible_automation_platform_operator_on_openshift_container_platform/index[Ansible Automation Platform Operator] - For pre configuration of network, storage, bare metal resources, DNS, certificates, preparation of VMware clusters and day 2 operations the Ansible Automation platform has validated content that can help customers perform all of these tasks and more to deliver an end to end automated experience.
