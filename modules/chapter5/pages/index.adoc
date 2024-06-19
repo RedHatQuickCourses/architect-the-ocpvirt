@@ -1,0 +1,7 @@
+= Reference Design and Architecture
+
+This chapter covers OpenShift Virtualization reference design and architecture.
+
+Chapter goals:
+
+* Learn the reference design and architecture.

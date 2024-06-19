@@ -1,0 +1,7 @@
+= Reference Implementation
+
+This chapter covers cluster deployment configuration and post-install configuration.
+
+Chapter goals:
+
+* Deploy and configure OpenShift Features to support virtual machines and applications.
