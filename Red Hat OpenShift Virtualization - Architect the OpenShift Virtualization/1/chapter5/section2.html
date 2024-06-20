@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Architect the OpenShift Virtualization</title>
+    <title>Network :: Architect the OpenShift Virtualization</title>
     <link rel="prev" href="section1.html">
     <link rel="next" href="section3.html">
     <meta name="generator" content="Antora 3.1.3">
@@ -138,16 +138,16 @@
     <a class="nav-link" href="index.html">Additional Features</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="section1.html">section1.adoc</a>
+    <a class="nav-link" href="section1.html">Compute</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="section2.html">section2.adoc</a>
+    <a class="nav-link" href="section2.html">Network</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="section3.html">section3.adoc</a>
+    <a class="nav-link" href="section3.html">Storage</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="section4.html">section4.adoc</a>
+    <a class="nav-link" href="section4.html">Resource Capacity Calculation</a>
   </li>
 </ul>
   </li>
@@ -211,7 +211,7 @@
   <ul>
     <li><a href="../index.html">Architect the OpenShift Virtualization</a></li>
     <li><a href="index.html">Additional Features</a></li>
-    <li><a href="section2.html">section2.adoc</a></li>
+    <li><a href="section2.html">Network</a></li>
   </ul>
 </nav>
 </div>
@@ -220,10 +220,66 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-
+<h1 class="page">Network</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>An OpenShift cluster is configured using an overlay software-defined network (SDN) for both the Pod and Service networks.
+By default, VMs are configured with connectivity to the SDN and have the same features/connectivity as Pod-based applications.
+This means they have an internal-only IP address for being accessed across the SDN, with internal DNS resolution provided by creating a Service to abstract access to one or more VMs. On the SDN, the virtual machine can then have a specific service or port exposed through a Route like Pods.
+The Multus Container Network Interface (CNI), which is deployed and used with all OpenShift clusters, enables attaching multiple network interfaces to Pods and VMs, including simultaneous connections to the SDN and one-or-more external (e.g. VLAN) networks.</p>
+</div>
+<div class="paragraph">
+<p>Host-level networking configurations are created and applied using the NMstate operator.
+This includes the ability to report the current configuration options, such as bonds, bridges, and VLAN tags to help segregate networking resources, as well as apply desired-state configuration for those entities.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/Network_bond.png" alt="Network bond">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_software_defined_networking_sdn"><a class="anchor" href="#_software_defined_networking_sdn"></a>Software-Defined Networking (SDN)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As of OpenShift 4.15, the Red Hat-provided SDN option with OpenShift is OVN-Kubernetes.
+OVN-Kubernetes is based on Open Virtual Network (OVN) and provides an overlay-based networking implementation.
+A cluster that uses the OVN-Kubernetes plugin also runs Open vSwitch (OVS) on each node. OVN configures OVS on each node to implement the declared network configuration.</p>
+</div>
+<div class="sect2">
+<h3 id="_additional_sdn_options"><a class="anchor" href="#_additional_sdn_options"></a>Additional SDN Options</h3>
+<div class="paragraph">
+<p>There are many partners, such as Tigera, Cisco, Citrix, and F5, which also have SDN and other network plugins which work with OpenShift Virtualization to bring additional features and capabilities to virtual machines. Confirm with your vendor the capabilities which work with VMs.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_networking_architecture"><a class="anchor" href="#_networking_architecture"></a>Networking Architecture</h3>
+<div class="paragraph">
+<p>By default, OpenShift Virtualization will conduct most communication using the SDN.
+There are two methods primarily for virtual machines or the applications currently running on the cluster to be accessed publicly.
+Like a Pod-based application, a Service can be created, mapped to an open port on the virtual machine, and a Route is used to expose external access to the application. However, this only works for HTTP(s)-based applications using port 80 and/or 443.</p>
+</div>
+<div class="paragraph">
+<p>For other protocols and ports, using a Service with type LoadBalancer, such as MetalLB or one from partners such as F5 and Citrix, enables the application to be publicly accessible without the VM being connected directly to an L2 (VLAN) network.
+Deploying and configuring a load balancer provider is a post-deployment configuration option.
+The recommended option for this reference architecture is to use MetalLB with L3 mode if possible, or L2 mode as a fall back.</p>
+</div>
+<div class="paragraph">
+<p>Furthermore, it is also possible to configure additional network resources to provide access to an external network so that the VM is configured with an IP address which allows the guest operating system to be accessed directly using a remote connectivity protocol like SSH.
+Refer to the section above for <a href="https://docs.google.com/document/d/1ItlaqzBh9EcDqDA__gbpKBQd0MhJO-0_KxqHqnKHS9c/edit#heading=h.6hda99jr4zi4">configuring additional network segments</a> for how to set up this scenario within OpenShift Virtualization.
+<a href="https://access.redhat.com/support/articles/ansible-automation-platform-certified-content">Ansible Automation Platform</a> provides the ability to configure additional settings and scenarios within the guest operating system as well.</p>
+</div>
+<div class="paragraph">
+<p>For more information about network configuration options in OpenShift, please see the documentation available <a href="https://docs.openshift.com/container-platform/4.13/networking/about-networking.html">here</a>.</p>
+</div>
+</div>
+</div>
+</div>
 <nav class="pagination">
-  <span class="prev"><a href="section1.html">section1.adoc</a></span>
-  <span class="next"><a href="section3.html">section3.adoc</a></span>
+  <span class="prev"><a href="section1.html">Compute</a></span>
+  <span class="next"><a href="section3.html">Storage</a></span>
 </nav>
 </article>
   </div>
