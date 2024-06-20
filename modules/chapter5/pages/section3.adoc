@@ -1,0 +1,56 @@
+= Storage
+
+OpenShift Virtualization uses the Persistent Volume (PV) paradigm from Kubernetes to provide storage for virtual machines.
+More specifically, each VM disk is stored in a dedicated persistent volume provisioned and managed by a CSI (Container Storage Interface) driver provided by Red Hat or a supported storage vendor.
+
+== CSI Provider
+
+This is different from the paradigm used by other virtualization offerings where a single storage device, e.g. an iSCSI/FC LUN or NFS export, is used to store many virtual machine disks.
+The granular provisioning, application of features, control/management, and consumption of VM disks enables the storage provider to customize and tailor the capabilities of the VM disk specifically to the workload, which is abstracted via the storage class within OpenShift.
+
+Live migration of virtual machines requires that all virtual machine disks for the VM being migrated use PVCs with the read-write-many (RWX) access mode.
+This is so that the disk can be mounted to both the source and destination hypervisor node during the migration.
+While both block (iSCSI, Fiber Channel, etc.) and file (NFS) protocols support RWX access, you must verify with your storage vendor any additional requirements or limitations specific to the storage device being used to host the virtual machine.
+
+The Container Storage Interface (CSI) is a standardized abstraction for managing and consuming storage within Kubernetes.
+OpenShift Virtualization using this paradigm means that storage from any vendor with a CSI driver that meets the needs and requirements can be used for virtual machine disks.
+
+The diagram below provides a high-level overview of the CSI components in an OpenShift cluster.
+The CSI driver coordinates the creation and management of the volume on the storage device, mounting of the volume to the node hosting the virtual machine, and implementing features like snapshots and volume resizing at the storage volume level.
+
+image::Storage_CSI.png[]
+
+Multiple CSI drivers can be deployed to an OpenShift cluster to enable support of many different storage backends.
+This allows VMs to use various disk types, storage protocols, and access modes from different vendors to best suit the workload.
+
+The https://access.redhat.com/documentation/en-us/openshift_container_platform/4.15/html/storage/using-container-storage-interface-csi#csi-drivers-supported_persistent-storage-csi[table describes the CSI drivers] that are installed by default in an OpenShift cluster, dependent on the infrastructure platform used, along with which CSI features they support, such as volume snapshots, cloning, and resize.
+
+
+It’s also important to note here that not all of these storage types are available with every OpenShift cluster deployment, nor are they all currently compatible with OpenShift Virtualization.
+For example, with the 4.15 release, support for OpenShift Virtualization deployments requires the use of physical servers deployed on-premises, or bare metal nodes deployed in ROSA or AWS self-managed deployments.
+Other cloud-based deployments and platform types are in exploratory stages scheduled for a later release.
+This means that as of today, the storage drivers from those cloud providers cannot be used with OpenShift Virtualization, but only traditional container workloads in OpenShift.
+
+In addition to those CSI drivers included with OpenShift by default there are a number of additional CSI drivers from partners such as Pure Storage (and Portworx), NetApp, HPE, Dell/EMC, Hitachi, Fujitsu, and more available via OperatorHub within OpenShift or from the storage vendor directly that support OpenShift Virtualization.
+Check with your storage vendor for details on their driver’s availability and capabilities.
+While each of these options provide basic storage functionality, they are often designed to leverage advanced features of the partner storage platform that can be used with OpenShift Virtualization.
+
+A few examples of advanced features provided by vendor CSI drivers are listed below:
+
+Storage QOS - Resource quotas can be set for storage per project or across projects to ensure QoS and control I/O.
+Using quotas and limit ranges, cluster administrators can set constraints to limit the number of objects or amount of compute resources that are used in your project.
+This helps cluster administrators better manage and allocate resources across all projects, and ensure that no projects are using more than is appropriate for the cluster size.
+
+Storage multipathing - OpenShift Virtualization leverages the capabilities of the underlying operating system, Red Hat Enterprise Linux CoreOS, to provide these capabilities.
+Multipathing is not enabled as a default feature in CoreOS, in order to streamline the base deployed image.
+To enable this feature, it is recommended to use a Machine Config Operator to enable multipathing for optimal  storage access to choose the best path. For more information about day 2 operations, such as enabling multipath in OpenShift, please see the documentation https://docs.openshift.com/container-platform/4.15/post_installation_configuration/machine-configuration-tasks.html[here].
+
+Multi-host PVC mounting - ODF, and other CSI (see above) options, allow for disk sharing in RWX (read/write many) access mode and with Ceph based storage clustering of disks.
+RWX PVCs are required for virtual machine live migration.
+
+For a matrix of features that are provided by OpenShift Virtualization, please see the following chart:
+
+image::storage_feature_matrix.png[]
+
+1. PVCs must request a *ReadWriteMany* access mode.
+2. Storage provider must support both Kubernetes and CSI snapshot APIs.

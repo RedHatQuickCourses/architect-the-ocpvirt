@@ -1,0 +1,37 @@
+= Network
+
+An OpenShift cluster is configured using an overlay software-defined network (SDN) for both the Pod and Service networks.
+By default, VMs are configured with connectivity to the SDN and have the same features/connectivity as Pod-based applications.
+This means they have an internal-only IP address for being accessed across the SDN, with internal DNS resolution provided by creating a Service to abstract access to one or more VMs. On the SDN, the virtual machine can then have a specific service or port exposed through a Route like Pods.
+The Multus Container Network Interface (CNI), which is deployed and used with all OpenShift clusters, enables attaching multiple network interfaces to Pods and VMs, including simultaneous connections to the SDN and one-or-more external (e.g. VLAN) networks.
+
+Host-level networking configurations are created and applied using the NMstate operator.
+This includes the ability to report the current configuration options, such as bonds, bridges, and VLAN tags to help segregate networking resources, as well as apply desired-state configuration for those entities.
+
+image::Network_bond.png[]
+
+== Software-Defined Networking (SDN)
+
+As of OpenShift 4.15, the Red Hat-provided SDN option with OpenShift is OVN-Kubernetes.
+OVN-Kubernetes is based on Open Virtual Network (OVN) and provides an overlay-based networking implementation.
+A cluster that uses the OVN-Kubernetes plugin also runs Open vSwitch (OVS) on each node. OVN configures OVS on each node to implement the declared network configuration.
+
+=== Additional SDN Options
+
+There are many partners, such as Tigera, Cisco, Citrix, and F5, which also have SDN and other network plugins which work with OpenShift Virtualization to bring additional features and capabilities to virtual machines. Confirm with your vendor the capabilities which work with VMs.
+
+=== Networking Architecture
+
+By default, OpenShift Virtualization will conduct most communication using the SDN.
+There are two methods primarily for virtual machines or the applications currently running on the cluster to be accessed publicly.
+Like a Pod-based application, a Service can be created, mapped to an open port on the virtual machine, and a Route is used to expose external access to the application. However, this only works for HTTP(s)-based applications using port 80 and/or 443.
+
+For other protocols and ports, using a Service with type LoadBalancer, such as MetalLB or one from partners such as F5 and Citrix, enables the application to be publicly accessible without the VM being connected directly to an L2 (VLAN) network.
+Deploying and configuring a load balancer provider is a post-deployment configuration option.
+The recommended option for this reference architecture is to use MetalLB with L3 mode if possible, or L2 mode as a fall back.
+
+Furthermore, it is also possible to configure additional network resources to provide access to an external network so that the VM is configured with an IP address which allows the guest operating system to be accessed directly using a remote connectivity protocol like SSH.
+Refer to the section above for https://docs.google.com/document/d/1ItlaqzBh9EcDqDA__gbpKBQd0MhJO-0_KxqHqnKHS9c/edit#heading=h.6hda99jr4zi4[configuring additional network segments] for how to set up this scenario within OpenShift Virtualization.
+https://access.redhat.com/support/articles/ansible-automation-platform-certified-content[Ansible Automation Platform] provides the ability to configure additional settings and scenarios within the guest operating system as well.
+
+For more information about network configuration options in OpenShift, please see the documentation available https://docs.openshift.com/container-platform/4.13/networking/about-networking.html[here].

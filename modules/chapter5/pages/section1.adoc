@@ -1,0 +1,17 @@
+= Compute
+
+OpenShift Virtualization introduces support for virtual machines as a native capability to OpenShift, Red Hat’s enterprise application platform offering based on Kubernetes.
+The concept of using virtual machines in a “Kubernetes way” may seem strange to those that are used to traditional hypervisors.
+However, they will find that many of the same features and capabilities that are expected of any enterprise class virtualization solution, are available in OpenShift Virtualization.
+
+== GPU/vGPU access
+
+If your virtual machines need to utilize (v)GPU resources, ensure that you https://docs.openshift.com/container-platform/4.15/virt/virtual_machines/advanced_vm_management/virt-configuring-virtual-gpus.html[follow the documentation] for enabling access to mediated devices and enabling other features (IOMMU) as needed.
+
+== Hardware/PCI Passthrough
+
+The PCI passthrough feature allows you to present direct access to hardware devices of host machines to the virtual guests themselves.
+This can be useful for a number of reasons primarily related to resource isolation for the virtual machine and the workload it is hosting.
+Examples include virtual machines running AI/ML based workloads, which can be granted direct access to GPU devices on the host, or perhaps a guest that requires a large amount of network bandwidth can be attached directly to a physical network adapter instead of sharing the SDN with other virtual machines.
+For more information related to device passthrough in OpenShift Virtualization, see the documentation https://docs.openshift.com/container-platform/4.13/virt/virtual_machines/advanced_vm_management/virt-configuring-pci-passthrough.html[here].
+
