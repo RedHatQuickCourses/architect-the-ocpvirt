@@ -19,7 +19,7 @@ Compact and full are two sides of the same coin, but we need to know other info 
 ** Each of these places additional burden on the control plane components.
 This may affect the size of those nodes if they’re dedicated or how many VMs can be hosted on the control plane nodes.
 
-Let’s say that the customer has chosen the *11-node cluste*r size from previous section.
+Let’s say that the customer has chosen the *11-node cluster* size from previous section.
 They want to have schedulable control plane nodes that are able to host their workloads, multiple additional OpenShift Platform Plus features, and intend to use homogeneous nodes.
 For the sake of simplicity, let’s assume that the combined resource requirements for this totals approximately *15%* of the three control plane nodes.
 This means that the cluster needs to have and additional *(3 * 15) / (11 * 100) = 4% total cluster capacity* for non-VM workloads.
