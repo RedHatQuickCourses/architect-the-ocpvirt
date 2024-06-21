@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Architect the OpenShift Virtualization</title>
+    <title>Overview :: Architect the OpenShift Virtualization</title>
     <link rel="prev" href="index.html">
     <link rel="next" href="section2.html">
     <meta name="generator" content="Antora 3.1.3">
@@ -160,22 +160,25 @@
     <a class="nav-link" href="index.html">OpenShift Virtualization Sizing for Virtual Machines</a>
 <ul class="nav-list">
   <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="section1.html">section1.adoc</a>
+    <a class="nav-link" href="section1.html">Overview</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="section2.html">section2.adoc</a>
+    <a class="nav-link" href="section2.html">Raw Capacity Required for Workloads</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="section3.html">section3.adoc</a>
+    <a class="nav-link" href="section3.html">Decide the Node Size</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="section4.html">section4.adoc</a>
+    <a class="nav-link" href="section4.html">Adjust for Cluster Architecture</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="section5.html">section5.adoc</a>
+    <a class="nav-link" href="section5.html">Adjust for failover/HA and resource balancing</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="section6.html">section6.adoc</a>
+    <a class="nav-link" href="section6.html">Storage, Network and other special resources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="section7.html">Disaster Recovery</a>
   </li>
 </ul>
   </li>
@@ -211,7 +214,7 @@
   <ul>
     <li><a href="../index.html">Architect the OpenShift Virtualization</a></li>
     <li><a href="index.html">OpenShift Virtualization Sizing for Virtual Machines</a></li>
-    <li><a href="section1.html">section1.adoc</a></li>
+    <li><a href="section1.html">Overview</a></li>
   </ul>
 </nav>
 </div>
@@ -220,10 +223,70 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-
+<h1 class="page">Overview</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>It’s the same as any other OpenShift sizing.
+Each VM has a request for the full amount of memory plus overhead.
+There is no memory overcommitment (yet).
+Memory will be your biggest constraint and is how the cluster/nodes will be sized for the majority of deployments.</p>
+</div>
+<div class="paragraph">
+<p>At a high level, the process is to determine the amount of virtualization resources needed (VM sizes, overhead, burst capacity, failover capacity), add that to the amount of resources needed for cluster services (logging, metrics, ODF/ACM/ACS if hosted in the same cluster, etc.) and customer workload (hosted control planes, other Pods deployed to the hardware, etc.), then find a balance of node size vs node count.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_getting_started"><a class="anchor" href="#_getting_started"></a>Getting started</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To size an OpenShift cluster based on the number of virtual machines, we need a few important bits of information:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The size of the VMs, specifically CPU and memory.</p>
+</li>
+<li>
+<p>The number of VMs.</p>
+</li>
+<li>
+<p>The amount of overhead for the VMs.
+<a href="https://docs.openshift.com/container-platform/4.15/virt/install/preparing-cluster-for-virt.html#virt-cluster-resource-requirements_preparing-cluster-for-virt">This is static(ish)</a>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>With that information we can come up with various scenarios that will both affect, and be affected by, further decisions such as cluster architecture, HA capacity, and special resource requirements.</p>
+</div>
+<div class="paragraph">
+<p>To begin, we need to understand the desired workload. In the absence of valid VM sizing data, we will use “t-shirt” sizing for VMs:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>X-Small = 1 vCPU, 1GiB memory</p>
+</li>
+<li>
+<p>Small = 1 vCPU, 4GiB memory</p>
+</li>
+<li>
+<p>Medium = 2 vCPU, 8GiB memory</p>
+</li>
+<li>
+<p>Large = 4 vCPU, 24GiB memory</p>
+</li>
+<li>
+<p>X-Large = 8 vCPU, 48GiB memory</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 <nav class="pagination">
   <span class="prev"><a href="index.html">OpenShift Virtualization Sizing for Virtual Machines</a></span>
-  <span class="next"><a href="section2.html">section2.adoc</a></span>
+  <span class="next"><a href="section2.html">Raw Capacity Required for Workloads</a></span>
 </nav>
 </article>
   </div>

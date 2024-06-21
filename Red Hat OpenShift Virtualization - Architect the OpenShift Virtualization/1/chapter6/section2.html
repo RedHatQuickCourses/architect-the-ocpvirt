@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Architect the OpenShift Virtualization</title>
+    <title>Raw Capacity Required for Workloads :: Architect the OpenShift Virtualization</title>
     <link rel="prev" href="section1.html">
     <link rel="next" href="section3.html">
     <meta name="generator" content="Antora 3.1.3">
@@ -160,22 +160,25 @@
     <a class="nav-link" href="index.html">OpenShift Virtualization Sizing for Virtual Machines</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="section1.html">section1.adoc</a>
+    <a class="nav-link" href="section1.html">Overview</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="section2.html">section2.adoc</a>
+    <a class="nav-link" href="section2.html">Raw Capacity Required for Workloads</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="section3.html">section3.adoc</a>
+    <a class="nav-link" href="section3.html">Decide the Node Size</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="section4.html">section4.adoc</a>
+    <a class="nav-link" href="section4.html">Adjust for Cluster Architecture</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="section5.html">section5.adoc</a>
+    <a class="nav-link" href="section5.html">Adjust for failover/HA and resource balancing</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="section6.html">section6.adoc</a>
+    <a class="nav-link" href="section6.html">Storage, Network and other special resources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="section7.html">Disaster Recovery</a>
   </li>
 </ul>
   </li>
@@ -211,7 +214,7 @@
   <ul>
     <li><a href="../index.html">Architect the OpenShift Virtualization</a></li>
     <li><a href="index.html">OpenShift Virtualization Sizing for Virtual Machines</a></li>
-    <li><a href="section2.html">section2.adoc</a></li>
+    <li><a href="section2.html">Raw Capacity Required for Workloads</a></li>
   </ul>
 </nav>
 </div>
@@ -220,10 +223,34 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-
+<h1 class="page">Raw Capacity Required for Workloads</h1>
+<div class="paragraph">
+<p>To set the stage for the remainder of the example, let’s identify a desired workload.
+The customer wants to host these many VMs:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1000 small = 1000 vCPU, 4000GiB. Plus 228 GiB memory overhead.</p>
+</li>
+<li>
+<p>300 medium = 600 vCPU, 2400GiB. Plus 73 GiB memory overhead.</p>
+</li>
+<li>
+<p>200 large = 800 vCPU, 4800GiB. Plus 58 GiB memory overhead.</p>
+</li>
+<li>
+<p>200 x-large = 1600 vCPU, 9600GiB. Plus 64 GiB memory overhead.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This brings us to a total of <strong>1700 VMs</strong> using <strong>4000 vCPUs</strong> and <strong>20800 GiB memory</strong>, plus <strong>423 GiB</strong> overhead.
+The average VM will have <strong>2.4 vCPUs</strong> and use <strong>12.5 GiB memory</strong>, which is a convenient way of estimating capacity for nodes.</p>
+</div>
 <nav class="pagination">
-  <span class="prev"><a href="section1.html">section1.adoc</a></span>
-  <span class="next"><a href="section3.html">section3.adoc</a></span>
+  <span class="prev"><a href="section1.html">Overview</a></span>
+  <span class="next"><a href="section3.html">Decide the Node Size</a></span>
 </nav>
 </article>
   </div>

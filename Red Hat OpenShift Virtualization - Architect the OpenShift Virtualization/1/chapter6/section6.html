@@ -3,8 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Architect the OpenShift Virtualization</title>
+    <title>Storage, Network and other special resources :: Architect the OpenShift Virtualization</title>
     <link rel="prev" href="section5.html">
+    <link rel="next" href="section7.html">
     <meta name="generator" content="Antora 3.1.3">
     <link rel="stylesheet" href="../../../_/css/site.css">
     <script>var uiRootPath = '../../../_'</script>
@@ -159,22 +160,25 @@
     <a class="nav-link" href="index.html">OpenShift Virtualization Sizing for Virtual Machines</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="section1.html">section1.adoc</a>
+    <a class="nav-link" href="section1.html">Overview</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="section2.html">section2.adoc</a>
+    <a class="nav-link" href="section2.html">Raw Capacity Required for Workloads</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="section3.html">section3.adoc</a>
+    <a class="nav-link" href="section3.html">Decide the Node Size</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="section4.html">section4.adoc</a>
+    <a class="nav-link" href="section4.html">Adjust for Cluster Architecture</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="section5.html">section5.adoc</a>
+    <a class="nav-link" href="section5.html">Adjust for failover/HA and resource balancing</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="section6.html">section6.adoc</a>
+    <a class="nav-link" href="section6.html">Storage, Network and other special resources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="section7.html">Disaster Recovery</a>
   </li>
 </ul>
   </li>
@@ -210,7 +214,7 @@
   <ul>
     <li><a href="../index.html">Architect the OpenShift Virtualization</a></li>
     <li><a href="index.html">OpenShift Virtualization Sizing for Virtual Machines</a></li>
-    <li><a href="section6.html">section6.adoc</a></li>
+    <li><a href="section6.html">Storage, Network and other special resources</a></li>
   </ul>
 </nav>
 </div>
@@ -219,9 +223,48 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-
+<h1 class="page">Storage, Network and other special resources</h1>
+<div class="paragraph">
+<p>There are multiple other aspects to consider that may affect specific node hardware.
+An incomplete list includes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>CPU, memory, network, and disk requirements for ODF, Portworx, and other Kubernetes-native storage solutions</p>
+</li>
+<li>
+<p>Network throughput for cluster functions, SDN, live migration, storage traffic, hosted applications, etc.</p>
+</li>
+<li>
+<p>High IO/throughput workloads that may cause resource starvation for co-hosted workloads.</p>
+</li>
+<li>
+<p>GPUs, SR-IOV devices, and other “special” resources that may be allocated to virtual machines such as dedicated CPUs, NUMA regions, etc.</p>
+</li>
+<li>
+<p>Regulatory, or self-imposed scheduling requirements/restrictions.
+Are there requirements that affect the ability to maximally utilize the resources in the cluster?
+For example, “Team A’s VMs cannot be co-hosted on the same servers as Team B’s.””.
+This includes not just (anti)affinity rules, but any taints/tolerations and special resources that the customer desires to protect.
+These will affect overall resource utilization and may impact sizing.</p>
+</li>
+<li>
+<p>Third-party agents and services, such as monitoring and log forwarding.</p>
+</li>
+<li>
+<p>Will there be excessively large virtual machines that might be a challenge to schedule?
+Will there be VMs with substantial CPU requirements that may need special accommodations and/or have limited scheduling opportunities?</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These can be difficult to accommodate in a generic sizing exercise like this; instead, it may be helpful to size them separately in an exercise dedicated to those workloads.
+The customer can choose to have one or more dedicated clusters for those workloads or use features such as taints and node selectors to keep cluster count to a minimum.</p>
+</div>
 <nav class="pagination">
-  <span class="prev"><a href="section5.html">section5.adoc</a></span>
+  <span class="prev"><a href="section5.html">Adjust for failover/HA and resource balancing</a></span>
+  <span class="next"><a href="section7.html">Disaster Recovery</a></span>
 </nav>
 </article>
   </div>

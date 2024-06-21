@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Architect the OpenShift Virtualization</title>
+    <title>Adjust for Cluster Architecture :: Architect the OpenShift Virtualization</title>
     <link rel="prev" href="section3.html">
     <link rel="next" href="section5.html">
     <meta name="generator" content="Antora 3.1.3">
@@ -160,22 +160,25 @@
     <a class="nav-link" href="index.html">OpenShift Virtualization Sizing for Virtual Machines</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="section1.html">section1.adoc</a>
+    <a class="nav-link" href="section1.html">Overview</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="section2.html">section2.adoc</a>
+    <a class="nav-link" href="section2.html">Raw Capacity Required for Workloads</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="section3.html">section3.adoc</a>
+    <a class="nav-link" href="section3.html">Decide the Node Size</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="section4.html">section4.adoc</a>
+    <a class="nav-link" href="section4.html">Adjust for Cluster Architecture</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="section5.html">section5.adoc</a>
+    <a class="nav-link" href="section5.html">Adjust for failover/HA and resource balancing</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="section6.html">section6.adoc</a>
+    <a class="nav-link" href="section6.html">Storage, Network and other special resources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="section7.html">Disaster Recovery</a>
   </li>
 </ul>
   </li>
@@ -211,7 +214,7 @@
   <ul>
     <li><a href="../index.html">Architect the OpenShift Virtualization</a></li>
     <li><a href="index.html">OpenShift Virtualization Sizing for Virtual Machines</a></li>
-    <li><a href="section4.html">section4.adoc</a></li>
+    <li><a href="section4.html">Adjust for Cluster Architecture</a></li>
   </ul>
 </nav>
 </div>
@@ -220,10 +223,77 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-
+<h1 class="page">Adjust for Cluster Architecture</h1>
+<div class="paragraph">
+<p>There are three architecture options:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>SNO</p>
+</li>
+<li>
+<p>Compact</p>
+</li>
+<li>
+<p>Full</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>SNO has some clear limitations and sizing is relatively straightforward, so we can ignore it for this exercise.</p>
+</div>
+<div class="paragraph">
+<p>Compact and full are two sides of the same coin, but we need to know other info too:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Does the customer want homogenous node sizes or are they willing to use a different node size for control plane and infra?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>If yes, then consider having schedulable control plane nodes that also host infra workload. Depending on the node size/capacity, there may still be capacity for customer workload on these nodes.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Will this cluster be using hosted control planes, where there are no control plane nodes?</p>
+</li>
+<li>
+<p>Which of the infra qualified add-on features, e.g. logging, etc., will be hosted by the cluster?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>If the cluster does not have dedicated infra (or combined infra + control plane) nodes, this capacity will need to be added to the overall requirement.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Is the customer planning on using features, such as pipelines and/or GitOps, which will increase the API server, and other control plane component, utilization?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Each of these places additional burden on the control plane components.
+This may affect the size of those nodes if they’re dedicated or how many VMs can be hosted on the control plane nodes.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Let’s say that the customer has chosen the <strong>11-node cluste*r size from previous section.
+They want to have schedulable control plane nodes that are able to host their workloads, multiple additional OpenShift Platform Plus features, and intend to use homogeneous nodes.
+For the sake of simplicity, let’s assume that the combined resource requirements for this totals approximately *15%</strong> of the three control plane nodes.
+This means that the cluster needs to have and additional <strong>(3 * 15) / (11 * 100) = 4% total cluster capacity</strong> for non-VM workloads.
+Since we do not already have this much excess capacity available (we rounded up from 10.4 &#8594; 11 nodes, which gives us 60% of one node distributed across the cluster, however that capacity is consumed by overhead), this would require a <strong>12th node</strong> to be added to the cluster.</p>
+</div>
 <nav class="pagination">
-  <span class="prev"><a href="section3.html">section3.adoc</a></span>
-  <span class="next"><a href="section5.html">section5.adoc</a></span>
+  <span class="prev"><a href="section3.html">Decide the Node Size</a></span>
+  <span class="next"><a href="section5.html">Adjust for failover/HA and resource balancing</a></span>
 </nav>
 </article>
   </div>
