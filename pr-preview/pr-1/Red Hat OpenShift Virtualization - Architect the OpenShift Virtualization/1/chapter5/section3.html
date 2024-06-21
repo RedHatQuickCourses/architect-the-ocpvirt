@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Storage :: Architect the OpenShift Virtualization</title>
+    <link rel="prev" href="section2.html">
+    <link rel="next" href="section4.html">
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">Architect the OpenShift Virtualization</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/architect-the-ocpvirt/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header><div class="body">
+<div class="nav-container" data-component="Red Hat OpenShift Virtualization - Architect the OpenShift Virtualization" data-version="1">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Architect the OpenShift Virtualization</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter1/index.html">Requirements of OpenShift Virtualization for Migration</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section1.html">Review of current VM environment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section2.html">Technical OpenShift Virtualization Questions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section3.html">Current Environment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section4.html">Workload Migration Complexity Analysis</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter2/index.html">Recommended Migration Approach</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/section1.html">Virtualization Migration Assessment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/section2.html">Pilot Foundation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/section3.html">Expand with Migration Factory</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/section4.html">Proof of Technology (PoT) Environment</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter3/index.html">Reference Design and Architecture</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/section1.html">Red Hat OpenShift Virtualization High-Level Design</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/section2.html">Physical Cluster Design</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/section3.html">Micro Cluster</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/section4.html">Small Cluster</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/section5.html">Medium Cluster</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/section6.html">Large Cluster</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter4/index.html">Reference Implementation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter4/section1.html">Cluster Deployment Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter4/section2.html">Post-install Configuration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Additional Features</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="section1.html">Compute</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="section2.html">Network</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="section3.html">Storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="section4.html">Resource Capacity Calculation</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter6/index.html">OpenShift Virtualization Sizing for Virtual Machines</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section1.html">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section2.html">Raw Capacity Required for Workloads</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section3.html">Decide the Node Size</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section4.html">Adjust for Cluster Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section5.html">Adjust for failover/HA and resource balancing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section6.html">Storage, Network and other special resources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section7.html">Disaster Recovery</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Architect the OpenShift Virtualization</span>
+    <span class="version">1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Architect the OpenShift Virtualization</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Architect the OpenShift Virtualization</a></li>
+    <li><a href="index.html">Additional Features</a></li>
+    <li><a href="section3.html">Storage</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Storage</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>OpenShift Virtualization uses the Persistent Volume (PV) paradigm from Kubernetes to provide storage for virtual machines.
+More specifically, each VM disk is stored in a dedicated persistent volume provisioned and managed by a CSI (Container Storage Interface) driver provided by Red Hat or a supported storage vendor.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_csi_provider"><a class="anchor" href="#_csi_provider"></a>CSI Provider</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This is different from the paradigm used by other virtualization offerings where a single storage device, e.g. an iSCSI/FC LUN or NFS export, is used to store many virtual machine disks.
+The granular provisioning, application of features, control/management, and consumption of VM disks enables the storage provider to customize and tailor the capabilities of the VM disk specifically to the workload, which is abstracted via the storage class within OpenShift.</p>
+</div>
+<div class="paragraph">
+<p>Live migration of virtual machines requires that all virtual machine disks for the VM being migrated use PVCs with the read-write-many (RWX) access mode.
+This is so that the disk can be mounted to both the source and destination hypervisor node during the migration.
+While both block (iSCSI, Fiber Channel, etc.) and file (NFS) protocols support RWX access, you must verify with your storage vendor any additional requirements or limitations specific to the storage device being used to host the virtual machine.</p>
+</div>
+<div class="paragraph">
+<p>The Container Storage Interface (CSI) is a standardized abstraction for managing and consuming storage within Kubernetes.
+OpenShift Virtualization using this paradigm means that storage from any vendor with a CSI driver that meets the needs and requirements can be used for virtual machine disks.</p>
+</div>
+<div class="paragraph">
+<p>The diagram below provides a high-level overview of the CSI components in an OpenShift cluster.
+The CSI driver coordinates the creation and management of the volume on the storage device, mounting of the volume to the node hosting the virtual machine, and implementing features like snapshots and volume resizing at the storage volume level.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/Storage_CSI.png" alt="Storage CSI">
+</div>
+</div>
+<div class="paragraph">
+<p>Multiple CSI drivers can be deployed to an OpenShift cluster to enable support of many different storage backends.
+This allows VMs to use various disk types, storage protocols, and access modes from different vendors to best suit the workload.</p>
+</div>
+<div class="paragraph">
+<p>The <a href="https://access.redhat.com/documentation/en-us/openshift_container_platform/4.15/html/storage/using-container-storage-interface-csi#csi-drivers-supported_persistent-storage-csi">table describes the CSI drivers</a> that are installed by default in an OpenShift cluster, dependent on the infrastructure platform used, along with which CSI features they support, such as volume snapshots, cloning, and resize.</p>
+</div>
+<div class="paragraph">
+<p>It’s also important to note here that not all of these storage types are available with every OpenShift cluster deployment, nor are they all currently compatible with OpenShift Virtualization.
+For example, with the 4.15 release, support for OpenShift Virtualization deployments requires the use of physical servers deployed on-premises, or bare metal nodes deployed in ROSA or AWS self-managed deployments.
+Other cloud-based deployments and platform types are in exploratory stages scheduled for a later release.
+This means that as of today, the storage drivers from those cloud providers cannot be used with OpenShift Virtualization, but only traditional container workloads in OpenShift.</p>
+</div>
+<div class="paragraph">
+<p>In addition to those CSI drivers included with OpenShift by default there are a number of additional CSI drivers from partners such as Pure Storage (and Portworx), NetApp, HPE, Dell/EMC, Hitachi, Fujitsu, and more available via OperatorHub within OpenShift or from the storage vendor directly that support OpenShift Virtualization.
+Check with your storage vendor for details on their driver’s availability and capabilities.
+While each of these options provide basic storage functionality, they are often designed to leverage advanced features of the partner storage platform that can be used with OpenShift Virtualization.</p>
+</div>
+<div class="paragraph">
+<p>A few examples of advanced features provided by vendor CSI drivers are listed below:</p>
+</div>
+<div class="paragraph">
+<p>Storage QOS - Resource quotas can be set for storage per project or across projects to ensure QoS and control I/O.
+Using quotas and limit ranges, cluster administrators can set constraints to limit the number of objects or amount of compute resources that are used in your project.
+This helps cluster administrators better manage and allocate resources across all projects, and ensure that no projects are using more than is appropriate for the cluster size.</p>
+</div>
+<div class="paragraph">
+<p>Storage multipathing - OpenShift Virtualization leverages the capabilities of the underlying operating system, Red Hat Enterprise Linux CoreOS, to provide these capabilities.
+Multipathing is not enabled as a default feature in CoreOS, in order to streamline the base deployed image.
+To enable this feature, it is recommended to use a Machine Config Operator to enable multipathing for optimal  storage access to choose the best path. For more information about day 2 operations, such as enabling multipath in OpenShift, please see the documentation <a href="https://docs.openshift.com/container-platform/4.15/post_installation_configuration/machine-configuration-tasks.html">here</a>.</p>
+</div>
+<div class="paragraph">
+<p>Multi-host PVC mounting - ODF, and other CSI (see above) options, allow for disk sharing in RWX (read/write many) access mode and with Ceph based storage clustering of disks.
+RWX PVCs are required for virtual machine live migration.</p>
+</div>
+<div class="paragraph">
+<p>For a matrix of features that are provided by OpenShift Virtualization, please see the following chart:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/storage_feature_matrix.png" alt="storage feature matrix">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>PVCs must request a <strong>ReadWriteMany</strong> access mode.</p>
+</li>
+<li>
+<p>Storage provider must support both Kubernetes and CSI snapshot APIs.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="section2.html">Network</a></span>
+  <span class="next"><a href="section4.html">Resource Capacity Calculation</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
