@@ -1,6 +1,7 @@
 = OpenShift Virtualization Sizing for Virtual Machines
 
-This chapter covers
+This chapter covers considerations for, and an example of, sizing OpenShift for virtual machines.
 
 Chapter goals:
 
+* Learn to size an OpenShift cluster based on the number of virtual machines.

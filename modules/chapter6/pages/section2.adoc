@@ -1,0 +1,12 @@
+= Raw Capacity Required for Workloads
+
+To set the stage for the remainder of the example, let’s identify a desired workload.
+The customer wants to host these many VMs:
+
+* 1000 small = 1000 vCPU, 4000GiB. Plus 228 GiB memory overhead.
+* 300 medium = 600 vCPU, 2400GiB. Plus 73 GiB memory overhead.
+* 200 large = 800 vCPU, 4800GiB. Plus 58 GiB memory overhead.
+* 200 x-large = 1600 vCPU, 9600GiB. Plus 64 GiB memory overhead.
+
+This brings us to a total of *1700 VMs* using *4000 vCPUs* and *20800 GiB memory*, plus *423 GiB* overhead.
+The average VM will have *2.4 vCPUs* and use *12.5 GiB memory*, which is a convenient way of estimating capacity for nodes.

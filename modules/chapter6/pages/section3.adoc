@@ -1,0 +1,48 @@
+= Decide the Node Size
+
+Now we need to determine node size. This includes a lot of factors, but the two that we will focus on are
+
+. failure domain, which is subjective, and
+. density, which can be driven by max Pod count and/or physical resources.
+
+For density, we know that the current https://docs.openshift.com/container-platform/4.15/scalability_and_performance/planning-your-environment-according-to-object-maximums.html#cluster-maximums-major-releases_object-limits[max pod count] is *2500*.
+At a minimum this deployment will need 4 nodes to be able to host the VM count.
+This would result in nodes that have *1700 / 4 = 425* VMs each.
+With the average VM size determined above, we see that the hosts would need capacity for at least *2.4 * 425 = 1020 vCPUs* and *12.4 * 425 = 5270 GiB memory*.
+Since we cannot do memory overcommitment, this means that memory becomes the limiting factor for most servers, which means a 4 node cluster is not feasible and, therefore, maximum density / fewest nodes in the cluster is not an optimal choice.
+
+Without memory overcommitment, this will almost certainly be the limiting factor for server size.
+If we assume that the typical/average virtualization server has *768 GiB of memory*, then we can determine the max VM count by dividing the total server memory by the average VM memory.
+In this case *768 / 12.4 = 62(ish) VMs* per node.
+This would result in the customer needing *1700 / 62 = 28 (rounded up) nodes* in the cluster based on memory.
+Each of those *28 servers* would need to host *2.4 * 62 = 149 vCPUs*.
+A modest *4:1 CPU overcommit* would result in the servers needing only *38 physical cores* to host the workload.
+A dual socket *22-core server* would have a small amount of unused, or “stranded”, CPU resources in this instance.
+
+A secondary factor is to attempt to avoid stranding resources by balancing CPU and memory according to requirements.
+This is as simple as keeping the physical *CPU:memory ratio* inline with the overall requirement - *4000:21000*, which reduces down to *1:5.25*.
+
+To balance the ratio, we also need to keep the CPU oversubscription factor in mind when choosing a physical server size.
+Jumping to *2 TiB* of memory per server, we can now host *2048 / 12.4 = 165(ish) VMs* per node based on memory, which would need *396 vCPUs*.
+A dual socket server with *24 cores* per socket would have an overcommit ratio of *396 / (2 * 24) = 8.25:1*.
+This both falls within the expected/allowable *CPU overcommit ratio* for OpenShift Virtualization (*defaults to 10:1*) and is inline with our overall *CPU:memory* ratio at *1:5.17*.
+
+*165 VMs* per node means our customer would need *11 (actual = 10.3, but you can’t buy .3 of a device) servers*.
+
+If we factor in failure domain size, we need to understand the amount of capacity lost when a server goes offline.
+*28 servers* means losing a single server would result in losing just *3.6% of total capacity*.
+*11 servers* means losing a single server would reduce total capacity by approximately *9%*.
+The lost server would also result in *28 or 165 VMs* needing to be rescheduled.
+Is either of these numbers too large of an impact? If so, then we need to adjust the size of the nodes downward to increase node count.
+This is a risk decision that can only be made by the customer.
+
+Thus far the above calculation has not taken into account node overhead.
+If we allow the nodes to https://docs.openshift.com/container-platform/4.15/nodes/nodes/nodes-nodes-resources-configuring.html#nodes-nodes-resources-configuring-auto_nodes-nodes-resources-configuring[automatically configure system] and kube reserved resources, then there is https://github.com/openshift/machine-config-operator/blob/release-4.14/templates/common/_base/files/kubelet-auto-sizing.yaml[a formula to follow].
+For a node with *768 GiB of memory*, *22 GiB* will be reserved for the system. With *2 TiB of memory*, *48 GiB* will be reserved.
+In both instances of a *44 or 48 core server*, the CPU reservation is modest at *.18 and .19 cores* respectively.
+
+OpenShift Virtualization itself has node overhead as well.
+This is a negligible *360 MiB memory* and a flat *2 cores per compute node*.
+
+These two overheads combined - approximately *2.2 cores* and *22 or 48 GiB memory* per node - may affect the size or density of the nodes.
+In this example, both of our node count estimates were rounded up (27.4 -> 28 and 10.4 -> 11), therefore it is expected that there is enough excess resources to accommodate these overheads already.

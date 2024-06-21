@@ -1,0 +1,20 @@
+= Storage, Network and other special resources
+
+There are multiple other aspects to consider that may affect specific node hardware.
+An incomplete list includes:
+
+* CPU, memory, network, and disk requirements for ODF, Portworx, and other Kubernetes-native storage solutions
+* Network throughput for cluster functions, SDN, live migration, storage traffic, hosted applications, etc.
+* High IO/throughput workloads that may cause resource starvation for co-hosted workloads.
+* GPUs, SR-IOV devices, and other “special” resources that may be allocated to virtual machines such as dedicated CPUs, NUMA regions, etc.
+* Regulatory, or self-imposed scheduling requirements/restrictions.
+Are there requirements that affect the ability to maximally utilize the resources in the cluster?
+For example, “Team A’s VMs cannot be co-hosted on the same servers as Team B’s.””.
+This includes not just (anti)affinity rules, but any taints/tolerations and special resources that the customer desires to protect.
+These will affect overall resource utilization and may impact sizing.
+* Third-party agents and services, such as monitoring and log forwarding.
+* Will there be excessively large virtual machines that might be a challenge to schedule?
+Will there be VMs with substantial CPU requirements that may need special accommodations and/or have limited scheduling opportunities?
+
+These can be difficult to accommodate in a generic sizing exercise like this; instead, it may be helpful to size them separately in an exercise dedicated to those workloads.
+The customer can choose to have one or more dedicated clusters for those workloads or use features such as taints and node selectors to keep cluster count to a minimum.

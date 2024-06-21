@@ -1,0 +1,27 @@
+= Overview
+
+It’s the same as any other OpenShift sizing.
+Each VM has a request for the full amount of memory plus overhead.
+There is no memory overcommitment (yet).
+Memory will be your biggest constraint and is how the cluster/nodes will be sized for the majority of deployments.
+
+At a high level, the process is to determine the amount of virtualization resources needed (VM sizes, overhead, burst capacity, failover capacity), add that to the amount of resources needed for cluster services (logging, metrics, ODF/ACM/ACS if hosted in the same cluster, etc.) and customer workload (hosted control planes, other Pods deployed to the hardware, etc.), then find a balance of node size vs node count.
+
+== Getting started
+
+To size an OpenShift cluster based on the number of virtual machines, we need a few important bits of information:
+
+* The size of the VMs, specifically CPU and memory.
+* The number of VMs.
+* The amount of overhead for the VMs.
+https://docs.openshift.com/container-platform/4.15/virt/install/preparing-cluster-for-virt.html#virt-cluster-resource-requirements_preparing-cluster-for-virt[This is static(ish)].
+
+With that information we can come up with various scenarios that will both affect, and be affected by, further decisions such as cluster architecture, HA capacity, and special resource requirements.
+
+To begin, we need to understand the desired workload. In the absence of valid VM sizing data, we will use “t-shirt” sizing for VMs:
+
+* X-Small = 1 vCPU, 1GiB memory
+* Small = 1 vCPU, 4GiB memory
+* Medium = 2 vCPU, 8GiB memory
+* Large = 4 vCPU, 24GiB memory
+* X-Large = 8 vCPU, 48GiB memory

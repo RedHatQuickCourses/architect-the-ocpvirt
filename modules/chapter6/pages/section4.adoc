@@ -1,0 +1,26 @@
+= Adjust for Cluster Architecture
+
+There are three architecture options:
+
+* SNO
+* Compact
+* Full
+
+SNO has some clear limitations and sizing is relatively straightforward, so we can ignore it for this exercise.
+
+Compact and full are two sides of the same coin, but we need to know other info too:
+
+* Does the customer want homogenous node sizes or are they willing to use a different node size for control plane and infra?
+** If yes, then consider having schedulable control plane nodes that also host infra workload. Depending on the node size/capacity, there may still be capacity for customer workload on these nodes.
+* Will this cluster be using hosted control planes, where there are no control plane nodes?
+* Which of the infra qualified add-on features, e.g. logging, etc., will be hosted by the cluster?
+** If the cluster does not have dedicated infra (or combined infra + control plane) nodes, this capacity will need to be added to the overall requirement.
+* Is the customer planning on using features, such as pipelines and/or GitOps, which will increase the API server, and other control plane component, utilization?
+** Each of these places additional burden on the control plane components.
+This may affect the size of those nodes if they’re dedicated or how many VMs can be hosted on the control plane nodes.
+
+Let’s say that the customer has chosen the *11-node cluste*r size from previous section.
+They want to have schedulable control plane nodes that are able to host their workloads, multiple additional OpenShift Platform Plus features, and intend to use homogeneous nodes.
+For the sake of simplicity, let’s assume that the combined resource requirements for this totals approximately *15%* of the three control plane nodes.
+This means that the cluster needs to have and additional *(3 * 15) / (11 * 100) = 4% total cluster capacity* for non-VM workloads.
+Since we do not already have this much excess capacity available (we rounded up from 10.4 -> 11 nodes, which gives us 60% of one node distributed across the cluster, however that capacity is consumed by overhead), this would require a *12th node* to be added to the cluster.

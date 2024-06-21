@@ -1,0 +1,19 @@
+= Adjust for failover/HA and resource balancing
+
+We factored in the size of the failure domain above, however we have not taken into account how to accommodate that capacity in the event of a failure scenario - or even when taking nodes offline for, for example, cluster updates and upgrades.
+With a *12 node cluster*, each node represents 8% of cluster capacity, so we need to accommodate for *8 * #_of_node_failures worth of capacity* to be rescheduled in the surviving nodes.
+
+* Tolerating one node failing would limit hosts to *92% maximum utilization*.
+* *Two-node tolerance* would limit hosts to *83%*.
+* *Three-node tolerance* would limit hosts to *75%*.
+
+Furthermore, we want to prevent things like out-of-memory conditions.
+When to trigger evictions will depend on a number of factors, most importantly we want to set the value low enough where soft evictions will have time to happen before hard evictions and/or any actions are taken by the OOM_kill process.
+A secondary consideration is that the soft eviction will also become the threshold where a node’s workload triggers rescheduling for things like resource balancing as well.
+
+Depending on the size of the nodes, the size of the VMs, and the length of time to live migrate virtual machines, it may make sense to have the *soft eviction threshold* set anywhere between *85% - 98%*.
+Splitting this down the middle for our example, if we choose *92% memory utilization* on servers with *2 TiB of memory*, that would trigger soft evictions (i.e., live migrations) for VMs when the host has approximately *160 GiB of free memory* remaining.
+This may or may not be enough for the workload and would need to be monitored and adjusted over time.
+
+However, for the sake of sizing, we can now assume that for a *12-node cluster* where we want to tolerate two nodes failing with a *soft eviction threshold of 8%* remaining capacity, we can math out that we are increasing overall resource requirements by *24% (16% for node failover capacity, 8% for eviction)*.
+This means we would want to increase the node count by *24%, 12 + (12 * .24) = 15 nodes* total.

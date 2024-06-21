@@ -1,0 +1,3 @@
+= Disaster Recovery
+
+See the https://access.redhat.com/articles/7041594[OpenShift Virtualization Disaster Recovery Guide] for strategies and methods to recover virtual machines at the destination site. For workloads which are identified to be recovered, follow the above steps at that site with the appropriate considerations.
