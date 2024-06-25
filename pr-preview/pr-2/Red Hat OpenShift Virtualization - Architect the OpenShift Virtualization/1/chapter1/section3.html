@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Current Environment :: Architect the OpenShift Virtualization</title>
+    <link rel="prev" href="section2.html">
+    <link rel="next" href="section4.html">
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">Architect the OpenShift Virtualization</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/architect-the-ocpvirt/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header><div class="body">
+<div class="nav-container" data-component="Red Hat OpenShift Virtualization - Architect the OpenShift Virtualization" data-version="1">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Architect the OpenShift Virtualization</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Requirements of OpenShift Virtualization for Migration</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="section1.html">Review of current VM environment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="section2.html">Technical OpenShift Virtualization Questions</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="section3.html">Current Environment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="section4.html">Workload Migration Complexity Analysis</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter2/index.html">Recommended Migration Approach</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/section1.html">Virtualization Migration Assessment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/section2.html">Pilot Foundation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/section3.html">Expand with Migration Factory</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/section4.html">Proof of Technology (PoT) Environment</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter3/index.html">Reference Design and Architecture</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/section1.html">Red Hat OpenShift Virtualization High-Level Design</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/section2.html">Physical Cluster Design</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/section3.html">Micro Cluster</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/section4.html">Small Cluster</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/section5.html">Medium Cluster</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/section6.html">Large Cluster</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter4/index.html">Reference Implementation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter4/section1.html">Cluster Deployment Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter4/section2.html">Post-install Configuration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter5/index.html">Additional Features</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter5/section1.html">Compute</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter5/section2.html">Network</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter5/section3.html">Storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter5/section4.html">Resource Capacity Calculation</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter6/index.html">OpenShift Virtualization Sizing for Virtual Machines</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section1.html">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section2.html">Raw Capacity Required for Workloads</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section3.html">Decide the Node Size</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section4.html">Adjust for Cluster Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section5.html">Adjust for failover/HA and resource balancing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section6.html">Storage, Network and other special resources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section7.html">Disaster Recovery</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Architect the OpenShift Virtualization</span>
+    <span class="version">1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Architect the OpenShift Virtualization</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Architect the OpenShift Virtualization</a></li>
+    <li><a href="index.html">Requirements of OpenShift Virtualization for Migration</a></li>
+    <li><a href="section3.html">Current Environment</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Current Environment</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Red Hat team asked a few questions from the previous section that were specific to the financial company&#8217;s current environment. The answers to these questions helped Red Hat understand the client&#8217;s existing infrastructure. Let&#8217;s take a look at what they discovered.</p>
+</div>
+<div class="paragraph">
+<p>The questioning revealed that the financial company’s infrastructure consists of more than 75,000 virtual machines (VMs) distributed across data centers in seven countries.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>These VMs can be categorized into four main types:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Production: 28,000 VMs</p>
+</li>
+<li>
+<p>Non-production: 31,000 VMs</p>
+</li>
+<li>
+<p>Management: 8,000 VMs</p>
+</li>
+<li>
+<p>Virtual Desktop Infrastructure (VDI): 6,000 VMs</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Approximately 19,000 VMs are under the responsibility of the Operations and Infrastructure (O&amp;I) team while the remaining VMs are owned by various product teams within the organization. Out of 75,000 VMs, 69,000 VMs can be potentially migrated to a new platform.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_infrastructure_tools"><a class="anchor" href="#_infrastructure_tools"></a>Infrastructure Tools</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Category</th>
+<th class="tableblock halign-left valign-top">Current Tools</th>
+<th class="tableblock halign-left valign-top">Future Tools</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hypervisor Guest Info Tools</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">vmware-tools</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">qemu-guest-agent</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Day1 Provisioning Automation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ServiceNow &gt; vCenter and ESXi</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Update ServiceNow to communicate with Openshift API</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Day1 VM Customization</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ServiceNow + Ansible playbooks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unchanged</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Day2 VM Operations</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ServiceNow &gt; vCenter and ESXi</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Update ServiceNow to communicate with Openshift API</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Day2 Guest OS Operations</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ServiceNow + Ansible playbooks, Chef</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unchanged</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Monitoring and Logging</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Opera (GEM) with Prometheus Remote-Writes, Splunk, Wazuh</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unchanged. Openshift runs a local Prometheus instance to remote write. Openshift Logging Operator can forward to Splunk.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Metrics, Alerts and Notification</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">vROps, Netcool NMS, node-exporter, BMC TrueSight/BCO</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Openshift does not generate SNMP Traps, but it does send Prometheus ALERTS, which can be configured to notify.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Backups and Recovery</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fulls: Netbackup Agent-based</p>
+<p class="tableblock">Snapshots: Rubrik, Cohesity</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Agent-based backups are unchanged.</p>
+<p class="tableblock">Snapshot-based backups will be one of the existing solutions decided by further evaluation of OpenShift support.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Security in Template/Image</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Incorporate vulnerability scan as part of CI pipeline for VM images</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Security in VM/Container</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Qualys</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Qualys (VMs)</p>
+<p class="tableblock">AquaSec (containers)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Secrets and Certificates</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Internal CA
+Venafi
+Hashicorp Vault</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unchanged for workloads.</p>
+<p class="tableblock">Cert-manager recommended to manage infrastructure certificates.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Authentication and Authorization</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LDAPS (AD)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unchanged.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="section2.html">Technical OpenShift Virtualization Questions</a></span>
+  <span class="next"><a href="section4.html">Workload Migration Complexity Analysis</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
