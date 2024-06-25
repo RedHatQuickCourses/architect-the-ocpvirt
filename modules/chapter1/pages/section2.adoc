@@ -1,8 +1,11 @@
 = Technical OpenShift Virtualization Questions
 
-The following questions will help you in finding the detailed information about current environment of the customer.
+//Added language to connect questions to previous scenario.
+The conversation with the financial services firm covered a range of questions. Below, you will see the questions organized by type. As you review them, think about how they would assist you in assembling detailed information about the current environment of the financial services customer.
 
 == General
+//Suggest adding introductory language to characterize why these high-level questions are important. Are there any particular responses we might anticipate that are unique to the financial services industry?
+//Suggest that we consider adding language to each top-level question to explain what meaning to draw from a common answer. For example, under the top-level question, "How many VMware clusters do you have running?", we might say, "The answers to this list of questions are important because of [reason], and companies that report having [X # of clusters] often need to address [these issues]." This language could be in italics at the bottom of each nested list. As an alternative, we could align such copy to each section, such as General, Networking, etc. The goal is to add just a little context to each grouping of questions.
 * How many VMware clusters do you have running?
 ** Are they in multiple locations?
 ** How many hypervisors per cluster?
@@ -36,7 +39,7 @@ The following questions will help you in finding the detailed information about 
 * Network Security
 ** What security measures are in place for network traffic within your VMware environment?
 ** Are there any specific firewall rules or network segmentation requirements that need to be replicated in OpenShift Virtualization?
-* DNS/Name Resolution
+* DNS/Name Resolution 
 ** How is DNS and NR currently managed?
 ** Are there any additional or specific DNS configurations/requirements that need to be addressed in the OpenShift Virtualization env?
 * Load Balancing/Service Discovery
@@ -82,7 +85,7 @@ The following questions will help you in finding the detailed information about 
 * Are there any existing training and/or certification initiatives for Kubernetes/OpenShift within their organization?
 * Do/Will your IT teams require training or “upskilling” in Kubernetes (or more specifically OpenShift) and OpenShift Virtualization?
 
-== Integration with Existing Systems:
+== Integration with Existing Systems
 * Are there any third-party systems, tools, and/or applications that need to integrate with OpenShift Virtualization (or your workloads running on OpenShift Virtualization)?  Please elaborate on each.
 
 == Automation
@@ -101,4 +104,5 @@ The following questions will help you in finding the detailed information about 
 * Do you have a budget allocated for this migration effort?
 * Are there plans to modernize any application into containers during the migration effort or shortly thereafter?
 * Do you anticipate any long-term growth or expansion of your app portfolio that may impact storage, networking, etc. requirements beyond the initial migration phase?
-
+//Is it feasible to characterize, at a high level, how this conversation may have gone with our financial services firm? 
+//Also, consider adding transitional copy to lead to the next page. This could flow out of the previous copy, if that suggestion is taken.
