@@ -2,14 +2,16 @@
 
 == Overview
 
-Prior to beginning the pilot phase in earnest, a proof of technology environment will be implemented by the financial company's team with support from Red Hat. This environment will prove the reliability of the proposed cluster architecture as it would be implemented inside of the financial company's network and datacenter constraints. The environment will also be retained to serve as  the infrastructure sandbox or lab environment where configurations and automations can be developed, tested, and evaluated for security and compliance.
+Prior to beginning the pilot phase in earnest, a proof of technology environment will be implemented by the financial company's team with support from Red Hat. This environment will prove the reliability of the proposed cluster architecture as it would be implemented inside of the financial company's network and datacenter constraints. The environment will also be retained to serve as the infrastructure sandbox or lab environment where configurations and automations can be developed, tested, and evaluated for security and compliance.
 
 image::PoT_environment.png[]
 
 == Foundation Cluster
 
 This cluster will host the control plane pods for the workload cluster(s) in the PoT environment as well as other management tooling as needed. The management tools expected to be installed for PoT evaluation are Advanced Cluster Management for Kubernetes (ACM), Ansible Automation Platform (AAP), OpenShift GitOps, and OpenShift cert-manager Operator or functional equivalents.
-Combining OpenShift control planes and management workloads onto a foundation cluster in this manner minimizes the overhead of OpenShift when running large numbers of clusters and provides a single point of management for performing deployment and maintenance of the OpenShift clusters within a datacenter or pod.
+//The original version of the following passage is rather long and in passive voice. I suggest the following to make it more clear: 
+
+By combining OpenShift control planes and management workloads onto a foundation cluster in this manner, the financial client minimizes the overhead of OpenShift when running large numbers of clusters and provides a single point of management for performing deployment and maintenance of the OpenShift clusters within a datacenter or pod.
 
 === Hardware
 
