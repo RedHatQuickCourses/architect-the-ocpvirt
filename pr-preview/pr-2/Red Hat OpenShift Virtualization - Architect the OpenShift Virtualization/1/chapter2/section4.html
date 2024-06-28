@@ -228,7 +228,7 @@
 <h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Prior to beginning the pilot phase in earnest, a proof of technology environment will be implemented by the financial company&#8217;s team with support from Red Hat. This environment will prove the reliability of the proposed cluster architecture as it would be implemented inside of the financial company&#8217;s network and datacenter constraints. The environment will also be retained to serve as  the infrastructure sandbox or lab environment where configurations and automations can be developed, tested, and evaluated for security and compliance.</p>
+<p>Prior to beginning the pilot phase in earnest, a proof of technology environment will be implemented by the financial company&#8217;s team with support from Red Hat. This environment will prove the reliability of the proposed cluster architecture as it would be implemented inside of the financial company&#8217;s network and datacenter constraints. The environment will also be retained to serve as the infrastructure sandbox or lab environment where configurations and automations can be developed, tested, and evaluated for security and compliance.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -241,8 +241,10 @@
 <h2 id="_foundation_cluster"><a class="anchor" href="#_foundation_cluster"></a>Foundation Cluster</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This cluster will host the control plane pods for the workload cluster(s) in the PoT environment as well as other management tooling as needed. The management tools expected to be installed for PoT evaluation are Advanced Cluster Management for Kubernetes (ACM), Ansible Automation Platform (AAP), OpenShift GitOps, and OpenShift cert-manager Operator or functional equivalents.
-Combining OpenShift control planes and management workloads onto a foundation cluster in this manner minimizes the overhead of OpenShift when running large numbers of clusters and provides a single point of management for performing deployment and maintenance of the OpenShift clusters within a datacenter or pod.</p>
+<p>This cluster will host the control plane pods for the workload cluster(s) in the PoT environment as well as other management tooling as needed. The management tools expected to be installed for PoT evaluation are Advanced Cluster Management for Kubernetes (ACM), Ansible Automation Platform (AAP), OpenShift GitOps, and OpenShift cert-manager Operator or functional equivalents.</p>
+</div>
+<div class="paragraph">
+<p>By combining OpenShift control planes and management workloads onto a foundation cluster in this manner, the financial client minimizes the overhead of OpenShift when running large numbers of clusters and provides a single point of management for performing deployment and maintenance of the OpenShift clusters within a datacenter or pod.</p>
 </div>
 <div class="sect2">
 <h3 id="_hardware"><a class="anchor" href="#_hardware"></a>Hardware</h3>
