@@ -236,38 +236,40 @@
 <p>Workload environment</p>
 </li>
 <li>
-<p>Operating System and Version</p>
+<p>Operating system and version</p>
 </li>
 <li>
-<p>Workload Type</p>
+<p>Workload type</p>
 </li>
 <li>
-<p>Resource Capacity and Requirement</p>
+<p>Resource capacity and requirement</p>
 </li>
 <li>
-<p>Disk Size</p>
+<p>Disk size</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>In the sections below, you will see the results of Red Hat&#8217;s evaluation of the financial company&#8217;s workloads.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_workload_environment"><a class="anchor" href="#_workload_environment"></a>Workload Environment</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Prioritizing lab and nonproduction workloads for migration will help ensure that we perform production migration as efficiently and smoothly as possible.</p>
+</div>
+<div class="sect2">
+<h3 id="_rhel_and_other_linux_distributions"><a class="anchor" href="#_rhel_and_other_linux_distributions"></a>RHEL and other Linux distributions</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>Prioritizing lab and nonproduction workloads for migration will help ensure that we perform production migration as efficiently and smoothly as possible.</p>
-</li>
-<li>
-<p>RHEL and other Linux Distributions</p>
-</li>
-<li>
-<p>Out of the 69,000 eligible workloads from VMware, we first categorize the VMs into supported operating systems and version or not.
+<p>In the scenario for this module, we calculated that our financial services firm had about 69,000 workloads from VMware that were eligible for migration. These eligible workloads must first be categorized into supported operating systems and version or not.
 You can refer the article on certified guest operating systems - <a href="https://access.redhat.com/articles/973163">Certified Guest Operating Systems in Red Hat OpenStack Platform, Red Hat Virtualization, Red Hat OpenShift Virtualization and Red Hat Enterprise Linux with KVM</a></p>
 </li>
 <li>
-<p>RHEL and RHEL-derivatives such as CentOS, Rocky and Oracle Linux that are newer than RHEL 5 will be placed into the easy bucket.
+<p>RHEL and RHEL-derivatives such as CentOS, Rocky, and Oracle Linux that are newer than RHEL 5 will be placed into the easy bucket.
 These versions are heavily tested and officially supported by Red Hat.
 The older versions will require upgrades before migration so they will be placed in the medium bucket.</p>
 </li>
@@ -382,10 +384,8 @@ The effort level will be determined on a case-by-case basis.</p>
 </tbody>
 </table>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_windows"><a class="anchor" href="#_windows"></a>Windows</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_windows"><a class="anchor" href="#_windows"></a>Windows</h3>
 <div class="paragraph">
 <p>Microsoft Windows and Microsoft Windows Servers are certified by Microsoft SVVP to run on Openshift Virtualization’s KVM hypervisor.
 The drivers will need to be changed out to virtio, so that increases the challenge.
@@ -431,11 +431,12 @@ If they are running on Hyper-V, Red Hat does not have a direct migration solutio
 </table>
 </div>
 </div>
+</div>
 <div class="sect1">
 <h2 id="_workload_type"><a class="anchor" href="#_workload_type"></a>Workload Type</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We call out Database, Message Bus, Hadoop, and Observability VMs as having higher complexity to migrate due to required persistence of objects in their runtime.
+<p>When we examine our financial client&#8217;s workload types, we are looking at the level of complexity. Here, you can see that we have identified database, message bus, Hadoop, and observability VMs as having higher complexity to migrate due to required persistence of objects in their runtime.
 They will be required to be quiesced and written to disk before migrating.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -498,7 +499,7 @@ They will be required to be quiesced and written to disk before migrating.</p>
 <h2 id="_resource_requirements"><a class="anchor" href="#_resource_requirements"></a>Resource Requirements</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>CPU and Memory requirements will limit what we can send to each cluster.
+<p>CPU and memory requirements will limit what we can send to each cluster.
 The financial company has a requirement that we utilize no more than 80% of the total physical memory and overcommit more than 4:1 vCPUs to physical CPUs.
 Additionally, two nodes of the cluster cannot be counted in the total available resources.
 They are assigned solely to handle node failures.</p>
@@ -510,7 +511,7 @@ They are assigned solely to handle node failures.</p>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The size of the VM disk affects the time to copy the vdmk to the cluster and the time it takes to convert the disk.
-These are controlled by the migration network bandwidth and the CPUs available during conversion.</p>
+These are controlled by the migration network bandwidth and the CPUs available during conversion. In the table below, you can see the varying disk sizes utilized by the financial company.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
