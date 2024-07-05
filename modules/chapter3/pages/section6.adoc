@@ -10,8 +10,8 @@
 
 [WARNING]
 
-//To make this sentence more clear, I would suggest recasting this phrase "failure domains are also defined" by using the active voice. That is, "We recommend that when deploying OpenShift Virtualization, [Someone] define failure domains at the physical architectural level...
-We do recommend that when deploying OpenShift Virtualization, failure domains are also defined at the physical architecture layer when possible to provide better resiliency.
+
+We recommend that when deploying OpenShift Virtualization, failure domains are also defined at the physical architecture layer when possible to provide better resiliency.
 Topology labels can be applied to nodes and used by VMs and containerized applications to spread across failure domains.
 A few examples of spreading across failure domains are:
 

@@ -1,11 +1,13 @@
 = Expand with Migration Factory
 
 //Suggest the following text instead:
-When it is time to do migration at scale, Red Hat turns to a phase called the Migration Factory. Red Hat recommends the "migration squad" model, which allows the execution workstream to be multiplied. 
+When it is time to do migration at scale, Red Hat turns to a phase called the Migration Factory.
+Red Hat recommends the "migration squad" model, which allows the execution workstream to be multiplied.
 
 The core migration team will consist of a Red Hat program manager, lead architect, platform consultant, and automation consultant, who will work alongside a core group from the financial company, preferably from the O&I team.
 
-Underneath the core migration team will be multiple migration squads, each led by an individual trained by the core migration team. These designated squad leaders will guide the VM owners through the process of migration.
+Underneath the core migration team will be multiple migration squads, each led by an individual trained by the core migration team.
+These designated squad leaders will guide the VM owners through the process of migration.
 
 Each squad will perform the following tasks:
 
@@ -28,7 +30,6 @@ Each squad will perform the following tasks:
 
 == Outputs
 
-//Suggest a short sentence here for flow:
 After the migration squads complete their tasks, they should see the following outputs:
 
 * Multiple migration plans executed

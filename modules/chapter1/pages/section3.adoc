@@ -1,23 +1,22 @@
 = Current Environment
 
-//Made judicious changes to the copy and line breaks to smooth out the flow.
 The Red Hat team asked a few questions from the previous section that were specific to the financial company's current environment. The answers to these questions helped Red Hat understand the client's existing infrastructure. Let's take a look at what they discovered.
 
 The questioning revealed that the financial company’s infrastructure consists of more than 75,000 virtual machines (VMs) distributed across data centers in seven countries.
 
 * These VMs can be categorized into four main types:
-** Production: 28,000 VMs
-** Non-production: 31,000 VMs
-** Management: 8,000 VMs
+** Production: 29,000 VMs
+** Non-production: 31,500 VMs
+** Management: 8,500 VMs
 ** Virtual Desktop Infrastructure (VDI): 6,000 VMs
-//This adds up to 73,000. Earlier, the copy said the number of VMs was more than 75,000. Also, in the source content, it was noted that the VDI VMs are non-VMware-based, and therefore not migratable. Do we need to call this out here? 
+
 //In the passage below, there is a similar issue of maintaining internal consistency around the number of VMs and the number that can be migrated.
-//Also, do we need to explain the significance of 19,000 VMs being under the management of O&I. 
+//Also, do we need to explain the significance of 19,000 VMs being under the management of O&I.
 
 Approximately 19,000 VMs are under the responsibility of the Operations and Infrastructure (O&I) team while the remaining VMs are owned by various product teams within the organization. Out of 75,000 VMs, 69,000 VMs can be potentially migrated to a new platform.
 
 == Infrastructure Tools
-//Consider a lead-in so there is some narrative flow for the learner. As a suggestion: "After the Red Hat team completed its assessment of the financial firm's present environment, the discussion turned to infrastructure tools and how they would and would not change. Explore the table below to learn more about the experience of this particular firm."
+After the Red Hat team completed its assessment of the financial firm's present environment, the discussion turned to infrastructure tools and how they would and would not change. Explore the table below to learn more about the experience of this particular firm.
 
 [cols="1,1,1"]
 |===

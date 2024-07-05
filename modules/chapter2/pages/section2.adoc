@@ -1,9 +1,7 @@
 = Pilot Foundation
 
-//Suggest we adjust the copy to stay with our narrative. Not sure if the following copy will work:
 After the migration assessment, Red Hat and the financial firm created a pilot. The pilot, the outline of which can be seen below, lays out the pathway for migration by preparing infrastructure, evaluating workloads, developing procedures, and providing training.
-//It is not clear who is being referred to when we say "Then we execute..." What about something like the following:
-The next step is for the client to execute the migration of an initial batch of VMs that exercise the strategies, automation, and procedural approach.
+The next step is to execute the migration of an initial batch of VMs that exercise the strategies, automation, and procedural approach.
 
 == Workstreams and Tasks
 
@@ -24,7 +22,6 @@ The next step is for the client to execute the migration of an initial batch of 
 ** Operations team training / enablement
 
 == Outputs
-//Made small copy edits.
 * One lab environment (carried over from PoT)
 * Non-production environment
 * One to three datacenters with production environments

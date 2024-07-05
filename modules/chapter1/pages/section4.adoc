@@ -9,12 +9,11 @@ Categorizing workload complexity will help us prioritize the migration plans and
 * Workload type
 * Resource capacity and requirement
 * Disk size
-//Suggested copy below to maintain connection to our scenario.
 
 In the sections below, you will see the results of Red Hat's evaluation of the financial company's workloads.
 
 == Workload Environment
-//Suggest that we organize the content under this header with two subheadings: Linux distributions and Windows. Further, in the draft below we return to the hypothetical numbers, so suggest that we recall the financial services firm for the learner. 
+//Suggest that we organize the content under this header with two subheadings: Linux distributions and Windows. Further, in the draft below we return to the hypothetical numbers, so suggest that we recall the financial services firm for the learner.
 Prioritizing lab and nonproduction workloads for migration will help ensure that we perform production migration as efficiently and smoothly as possible.
 
 === RHEL and other Linux distributions
@@ -170,7 +169,6 @@ Additionally, two nodes of the cluster cannot be counted in the total available 
 They are assigned solely to handle node failures.
 
 == Disk Size
-//Suggested a sentence at the end to maintain narrative connection to our financial company.
 The size of the VM disk affects the time to copy the vdmk to the cluster and the time it takes to convert the disk.
 These are controlled by the migration network bandwidth and the CPUs available during conversion. In the table below, you can see the varying disk sizes utilized by the financial company.
 

@@ -1,23 +1,19 @@
 = Virtualization Migration Assessment
 
 The Virtualization Migration Assessment ensures that Red Hat’s knowledge of OpenShift (OCP), OpenShift Virtualization (OCP-Virt), Migration Toolkit for Virtualization (MTV) and other technologies are properly communicated and demonstrated to clients.
-//I didn't quite understand the following sentence, as originally drafted: "The financial company will ensure that enterprise knowledge of the environment, their requirements, and goals are properly communicated." It was confusing because in the previous sentence we spoke of how the VMA "ensures" that Red Hat's knowledge of various products and processes is "communicated" to clients. Now, in the next sentence, that client is doing the ensuring, only they are ensuring that enterprise knowledge is being properly communicated. Communicated to whom? Are we saying that during the VMA, the client will communicate to Red Hat their knowledge of their enterprise environment, requirements, and goals? I think this is what we are trying to say, so I have suggested new copy below:
+
 During this assessment, the financial company should clearly communicate its knowledge of their enterprise environment, their requirements, and their goals.
 
 == Tasks
-//Made some copy edits here.
 
 * The financial company provided an in-depth review of their current environment, problems with their current environment, and their desired future environment.
 * Red Hat demoed OpenShift, OpenShift Virtualization, and the Migration Toolkit for Virtualization.
-* Red Hat provided an in-depth review of the relevant technology and tools and proposed a
-//What does HLD stand for?
- HLD to meet the financial company’s virtualization migration goals.
+* Red Hat provided an in-depth review of the relevant technology and tools and proposed a High Level Design (HLD) to meet the financial company’s virtualization migration goals.
 
 == Outputs
-//Suggest a short bit of narrative copy here.
 After the assessment was completed, the financial company was able to identify several key requirements for moving ahead with the migration.
 
-* Near- and long-term goals
+* Near and long-term goals
 * Proof of Technology (PoT) environment requirements
 * Proposed Architecture and Bill of Materials for Pilot Phase
 * Procurement estimates for Pilot infrastructure build

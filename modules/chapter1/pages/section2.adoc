@@ -1,6 +1,5 @@
 = Technical OpenShift Virtualization Questions
 
-//Added language to connect questions to previous scenario.
 The conversation with the financial services firm covered a range of questions. Below, you will see the questions organized by type. As you review them, think about how they would assist you in assembling detailed information about the current environment of the financial services customer.
 
 == General
@@ -39,9 +38,9 @@ The conversation with the financial services firm covered a range of questions. 
 * Network Security
 ** What security measures are in place for network traffic within your VMware environment?
 ** Are there any specific firewall rules or network segmentation requirements that need to be replicated in OpenShift Virtualization?
-* DNS/Name Resolution 
-** How is DNS and NR currently managed?
-** Are there any additional or specific DNS configurations/requirements that need to be addressed in the OpenShift Virtualization env?
+* DNS/Name Resolution
+** How are DNS and NR currently managed?
+** Are there any additional or specific DNS configurations/requirements that need to be addressed in the OpenShift Virtualization environment?
 * Load Balancing/Service Discovery
 ** How are they currently doing it?
 ** Are there any additional or specific requirements for service discovery, external lb, routing, etc?
@@ -49,7 +48,7 @@ The conversation with the financial services firm covered a range of questions. 
 ** Does your org have any requirements for network performance and latency?
 ** Any performance-critical applications or workloads relying on low-latency networking?
 * External Connectivity Requirements
-** Any requirements for external connectivity for apps hosted in the OpenShift Virtualization env?
+** Any requirements for external connectivity for apps hosted in the OpenShift Virtualization environment?
 * Network Monitoring and Troubleshooting
 ** What tools or processes do you have in place for monitoring and troubleshooting your network?
 
@@ -66,7 +65,7 @@ The conversation with the financial services firm covered a range of questions. 
 * Is there any additional storage capacity for migration efforts?
 
 == User Access and Authentication
-* How are they currently managed in your vmware env
+* How are they currently managed in your vmware environment
 * Any specific requirements for user authentication, access control, SSO, etc.?
 
 == Compliance and Governance
@@ -90,7 +89,7 @@ The conversation with the financial services firm covered a range of questions. 
 
 == Automation
 * Image Provisioning and Configuration
-** How are VM images currently provisioned and configured in your VMware env?
+** How are VM images currently provisioned and configured in your VMware environment?
 ** Do you use tools like cloud-init or sysprep for image customization and configuration?
 * Automated VM Provisioning
 ** Are there any requirements for automated VM provisioning and/or orchestration in the new OpenShift Virt environment?
@@ -104,5 +103,5 @@ The conversation with the financial services firm covered a range of questions. 
 * Do you have a budget allocated for this migration effort?
 * Are there plans to modernize any application into containers during the migration effort or shortly thereafter?
 * Do you anticipate any long-term growth or expansion of your app portfolio that may impact storage, networking, etc. requirements beyond the initial migration phase?
-//Is it feasible to characterize, at a high level, how this conversation may have gone with our financial services firm? 
+//Is it feasible to characterize, at a high level, how this conversation may have gone with our financial services firm?
 //Also, consider adding transitional copy to lead to the next page. This could flow out of the previous copy, if that suggestion is taken.
