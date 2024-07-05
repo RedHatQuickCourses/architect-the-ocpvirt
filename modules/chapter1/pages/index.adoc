@@ -1,6 +1,6 @@
 = Requirements of OpenShift Virtualization for Migration
 
-This chapter covers getting the existing VMware vSphere environment details and finding out the requirements of OpenShfit virtualization for migration.
+This chapter covers getting the existing VMware vSphere environment details and finding out the requirements of OpenShift virtualization for migration.
 
 Chapter goals:
 

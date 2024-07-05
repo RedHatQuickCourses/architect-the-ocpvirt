@@ -1,32 +1,39 @@
 = Expand with Migration Factory
 
-The Migration Factory phase describes how we do migration at scale and multiply the execution workstream.
-Red Hat recommends the Migration Squad Model.
-The Core Migration Team will consist of a Red Hat Program Manager, Lead Architect, Platform Consultant, and Automation Consultant alongside a core group of the financial company members, preferably from the O&I team.
-There will be multiple Migration Squads, each led by an individual trained by the Core Migration Team, who will guide the VM owners through the process of migration.
-Each Squad will be responsible for:
+//Suggest the following text instead:
+When it is time to do migration at scale, Red Hat turns to a phase called the Migration Factory.
+Red Hat recommends the "migration squad" model, which allows the execution workstream to be multiplied.
+
+The core migration team will consist of a Red Hat program manager, lead architect, platform consultant, and automation consultant, who will work alongside a core group from the financial company, preferably from the O&I team.
+
+Underneath the core migration team will be multiple migration squads, each led by an individual trained by the core migration team.
+These designated squad leaders will guide the VM owners through the process of migration.
+
+Each squad will perform the following tasks:
 
 == Tasks
 
-* Identify Workloads, Network, Storage
-* Identify related Workloads such as Clusters, 3-tier applications, dependent microservices
-* VM Migration
-** Ansible Development
+* Identify workloads, network, and storage
+* Identify related workloads such as clusters, 3-tier applications, dependent microservices
+* VM migration
+** Ansible development
 ** Reevaluation of processes and automation based on pilot migrations
-* ServiceNow Integration Workstream
-** Provisioning Operations
-** VM Control Operations (Day Two)
-** Migration Self Service
+* ServiceNow integration workstream
+** Provisioning operations
+** VM control operations (Day Two)
+** Migration self-service
 * Strategize migration approach
-** Acceptable Outage duration and window
-** Notification List
-** Preflight Checks
-** Success Criteria
+** Acceptable outage duration and window
+** Notification list
+** Preflight checks
+** Success criteria
 
 == Outputs
 
-* Multiple Migration Plans executed
-* Metrics Collected
+After the migration squads complete their tasks, they should see the following outputs:
+
+* Multiple migration plans executed
+* Metrics collected
 ** Speed
 ** Errors
 ** Outage times

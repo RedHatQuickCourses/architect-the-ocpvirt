@@ -5,18 +5,22 @@
 Categorizing workload complexity will help us prioritize the migration plans and give us an estimate of the effort. We base our evaluation on the following:
 
 * Workload environment
-* Operating System and Version
-* Workload Type
-* Resource Capacity and Requirement
-* Disk Size
+* Operating system and version
+* Workload type
+* Resource capacity and requirement
+* Disk size
+
+In the sections below, you will see the results of Red Hat's evaluation of the financial company's workloads.
 
 == Workload Environment
+//Suggest that we organize the content under this header with two subheadings: Linux distributions and Windows. Further, in the draft below we return to the hypothetical numbers, so suggest that we recall the financial services firm for the learner.
+Prioritizing lab and nonproduction workloads for migration will help ensure that we perform production migration as efficiently and smoothly as possible.
 
-* Prioritizing lab and nonproduction workloads for migration will help ensure that we perform production migration as efficiently and smoothly as possible.
-* RHEL and other Linux Distributions
-* Out of the 69,000 eligible workloads from VMware, we first categorize the VMs into supported operating systems and version or not.
+=== RHEL and other Linux distributions
+//Made change to nesting here. Also, suggested rewording of copy below to recall our example.
+* In the scenario for this module, we calculated that our financial services firm had about 69,000 workloads from VMware that were eligible for migration. These eligible workloads must first be categorized into supported operating systems and version or not.
 You can refer the article on certified guest operating systems - https://access.redhat.com/articles/973163[Certified Guest Operating Systems in Red Hat OpenStack Platform, Red Hat Virtualization, Red Hat OpenShift Virtualization and Red Hat Enterprise Linux with KVM]
-* RHEL and RHEL-derivatives such as CentOS, Rocky and Oracle Linux that are newer than RHEL 5 will be placed into the easy bucket.
+* RHEL and RHEL-derivatives such as CentOS, Rocky, and Oracle Linux that are newer than RHEL 5 will be placed into the easy bucket.
 These versions are heavily tested and officially supported by Red Hat.
 The older versions will require upgrades before migration so they will be placed in the medium bucket.
 * SUSE is also a supported distribution starting with version 12+.
@@ -93,7 +97,8 @@ The effort level will be determined on a case-by-case basis.
 | Total | 58047 | 148 | 1707
 |===
 
-== Windows
+=== Windows
+//made change to nesting here
 
 Microsoft Windows and Microsoft Windows Servers are certified by Microsoft SVVP to run on Openshift Virtualization’s KVM hypervisor.
 The drivers will need to be changed out to virtio, so that increases the challenge.
@@ -119,8 +124,9 @@ If they are running on Hyper-V, Red Hat does not have a direct migration solutio
 |===
 
 == Workload Type
+//Have resuggested new copy for the first sentence to maintain narrative flow. Also, I lowercased database, message bus, and observability in the paragraph below.
 
-We call out Database, Message Bus, Hadoop, and Observability VMs as having higher complexity to migrate due to required persistence of objects in their runtime.
+When we examine our financial client's workload types, we are looking at the level of complexity. Here, you can see that we have identified database, message bus, Hadoop, and observability VMs as having higher complexity to migrate due to required persistence of objects in their runtime.
 They will be required to be quiesced and written to disk before migrating.
 
 [cols="1,1,1,1"]
@@ -157,14 +163,14 @@ They will be required to be quiesced and written to disk before migrating.
 
 == Resource Requirements
 
-CPU and Memory requirements will limit what we can send to each cluster.
+CPU and memory requirements will limit what we can send to each cluster.
 The financial company has a requirement that we utilize no more than 80% of the total physical memory and overcommit more than 4:1 vCPUs to physical CPUs.
 Additionally, two nodes of the cluster cannot be counted in the total available resources.
 They are assigned solely to handle node failures.
 
 == Disk Size
 The size of the VM disk affects the time to copy the vdmk to the cluster and the time it takes to convert the disk.
-These are controlled by the migration network bandwidth and the CPUs available during conversion.
+These are controlled by the migration network bandwidth and the CPUs available during conversion. In the table below, you can see the varying disk sizes utilized by the financial company.
 
 [cols="1,1,1,1"]
 |===

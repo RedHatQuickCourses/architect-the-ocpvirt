@@ -29,7 +29,7 @@ For this course, you should have:
 The overall objectives of this course include:
 
 * Determine the requirements of OpenShift Virtualization for migration
-* Design and Configure the OpenShift Virtualization to host workloads that may currently reside on VMware vSphere
+* Design and configure the OpenShift Virtualization to host workloads that may currently reside on VMware vSphere
 
 == References
 

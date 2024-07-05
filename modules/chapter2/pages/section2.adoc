@@ -1,6 +1,7 @@
 = Pilot Foundation
 
-The pilot lays out the pathway for migration by preparing infrastructure, evaluating workloads, developing procedures and providing training. Then we execute the migration of an initial batch of VMs that exercise the strategies, automation and procedural approach.
+After the migration assessment, Red Hat and the financial firm created a pilot. The pilot, the outline of which can be seen below, lays out the pathway for migration by preparing infrastructure, evaluating workloads, developing procedures, and providing training.
+The next step is to execute the migration of an initial batch of VMs that exercise the strategies, automation, and procedural approach.
 
 == Workstreams and Tasks
 
@@ -21,10 +22,9 @@ The pilot lays out the pathway for migration by preparing infrastructure, evalua
 ** Operations team training / enablement
 
 == Outputs
-
 * One lab environment (carried over from PoT)
 * Non-production environment
-* One to three datacenters with Production environments
+* One to three datacenters with production environments
 * Automation for ESXi host to OpenShift reprovisioning
 * Initial automation for VM migrations tested with pilot workloads
 * ServiceNow able to provision new workloads to OpenShift Virtualization
