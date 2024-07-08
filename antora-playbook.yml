@@ -1,6 +1,6 @@
 site:
-  title: Architect the OpenShift Virtualization
-  start_page: Red Hat OpenShift Virtualization - Architect the OpenShift Virtualization::index.adoc
+  title: Architecting OpenShift Virtualization
+  start_page: Red Hat OpenShift Virtualization - Architecting OpenShift Virtualization::index.adoc
 
 content:
   sources:

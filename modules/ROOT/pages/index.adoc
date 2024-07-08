@@ -1,7 +1,7 @@
-= Architect the OpenShift Virtualization
+= Architecting OpenShift Virtualization
 :navtitle: Home
 
-Welcome to this quick course, _Architect the OpenShift Virtualization_.
+Welcome to this quick course, _Architecting OpenShift Virtualization_.
 This quick course is a part of a series of courses about Migrate Applications and VM workloads from VMware to OpenShift Virtualization.
 
 == Authors

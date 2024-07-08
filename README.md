@@ -1,4 +1,4 @@
-# Red Hat OpenShift Virtualization: Architect the OpenShift Virtualization
+# Red Hat OpenShift Virtualization: Architecting OpenShift Virtualization
 
 This quick course is a part of a series of courses about migration from VMware vSphere to Red Hat OpenShift Virtualization.
 This course focus on determining the requirements of OpenShift Virtualization for migration. It also focus on the design and configure the OpenShift Virtualization to host the workloads that may currently reside on VMware vSphere.
