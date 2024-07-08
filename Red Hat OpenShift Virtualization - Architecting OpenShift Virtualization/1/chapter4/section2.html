@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Post-install Configuration :: Architecting OpenShift Virtualization</title>
+    <link rel="prev" href="section1.html">
+    <link rel="next" href="../chapter5/index.html">
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">Architecting OpenShift Virtualization</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/architect-the-ocpvirt/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header><div class="body">
+<div class="nav-container" data-component="Red Hat OpenShift Virtualization - Architecting OpenShift Virtualization" data-version="1">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Architecting OpenShift Virtualization</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter1/index.html">Requirements of OpenShift Virtualization for Migration</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section1.html">Review of current VM environment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section2.html">Technical OpenShift Virtualization Questions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section3.html">Current Environment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section4.html">Workload Migration Complexity Analysis</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter2/index.html">Recommended Migration Approach</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/section1.html">Virtualization Migration Assessment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/section2.html">Pilot Foundation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/section3.html">Expand with Migration Factory</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/section4.html">Proof of Technology (PoT) Environment</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter3/index.html">Reference Design and Architecture</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/section1.html">Red Hat OpenShift Virtualization High-Level Design</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/section2.html">Physical Cluster Design</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/section3.html">Micro Cluster</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/section4.html">Small Cluster</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/section5.html">Medium Cluster</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/section6.html">Large Cluster</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Reference Implementation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="section1.html">Cluster Deployment Configuration</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="section2.html">Post-install Configuration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter5/index.html">Additional Features</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter5/section1.html">Compute</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter5/section2.html">Network</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter5/section3.html">Storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter5/section4.html">Resource Capacity Calculation</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter6/index.html">OpenShift Virtualization Sizing for Virtual Machines</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section1.html">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section2.html">Raw Capacity Required for Workloads</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section3.html">Decide the Node Size</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section4.html">Adjust for Cluster Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section5.html">Adjust for failover/HA and resource balancing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section6.html">Storage, Network and other special resources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section7.html">Disaster Recovery</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Architecting OpenShift Virtualization</span>
+    <span class="version">1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Architecting OpenShift Virtualization</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Architecting OpenShift Virtualization</a></li>
+    <li><a href="index.html">Reference Implementation</a></li>
+    <li><a href="section2.html">Post-install Configuration</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Post-install Configuration</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>After the OpenShift cluster has been deployed, with additional nodes joined for compute and storage roles, additional cluster configuration is needed to adjust and optimize the configuration for virtual machines.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_openshift_virtualization_operator_configuration"><a class="anchor" href="#_openshift_virtualization_operator_configuration"></a>OpenShift Virtualization Operator configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>OpenShift Virtualization is deployed and configured in the cluster using OperatorHub.
+Once installed, there are several configuration options to set.</p>
+</div>
+<div class="paragraph">
+<p>Follow <a href="https://docs.openshift.com/container-platform/4.15/virt/install/installing-virt.html">the documentation</a> for deploying the Operator and creating an instance of the HyperConverged resource.
+The below bullets represent common decisions and configuration parameters that are not default.</p>
+</div>
+<div class="paragraph">
+<p>Decide whether to download the default, Red Hat provided, operating system images.
+The Operator will automatically retrieve and make available cloud images for RHEL, Fedora, and CentOS when a default storage class is configured.
+If you do not intend to use these images, it is recommended to disable automatically retrieving them.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/ocpvirt_op_config1.png" alt="ocpvirt op config1">
+</div>
+</div>
+<div class="paragraph">
+<p>Configure the default CPU model to the lowest common denominator CPU model in the cluster.
+These values are determined by the CPU vendor and the highest, or lowest, CPU model available in the OpenShift cluster.
+For AMD CPUs, a value of EPYC is recommended, for Intel CPUs a value equivalent to the generation name, e.g.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/ocpvirt_op_config2.png" alt="ocpvirt op config2">
+</div>
+</div>
+<div class="paragraph">
+<p>If you do not want to use the default storage class for storing VM state related to, among other things, vTPM, set the desired storage class when deploying OpenShift Virtualization. This storage class must support RWX access mode.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/ocpvirt_op_config3.png" alt="ocpvirt op config3">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_machine_and_node_configuration"><a class="anchor" href="#_machine_and_node_configuration"></a>Machine and node configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>These tasks represent configurations applied to the cluster nodes after the cluster is deployed.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://docs.openshift.com/container-platform/4.15/post_installation_configuration/machine-configuration-tasks.html#installation-special-config-chrony_post-install-machine-configuration-tasks">Configure time synchronization</a> to avoid clock drift and issues related to inaccurate/inconsistent time, such as certificates being incorrectly marked invalid.</p>
+</div>
+<div class="paragraph">
+<p>Configure node health checks and fence agents remediation for reduced HA recovery time in the event of node failure.</p>
+</div>
+<div class="paragraph">
+<p>The <a href="https://access.redhat.com/documentation/en-us/workload_availability_for_red_hat_openshift/23.2/html-single/remediation_fencing_and_maintenance/index?extIdCarryOver=true&amp;sc_cid=701f2000001OH74AAG#installing-node-health-check-operator-using-web-console_node-health-check-operator">Node Health Check Operator</a> and <a href="https://access.redhat.com/documentation/en-us/workload_availability_for_red_hat_openshift/23.3/html/remediation_fencing_and_maintenance/fence-agents-remediation-operator-remediate-nodes#installing-fence-agents-remediation-operator-using-web-console_fence-agents-remediation-operator-remediate-nodes">Fence Agents Remediation Operator</a> are deployed from OperatorHub in the web console.
+Once installed an instance of the <a href="https://access.redhat.com/documentation/en-us/workload_availability_for_red_hat_openshift/23.3/html/remediation_fencing_and_maintenance/fence-agents-remediation-operator-remediate-nodes#configuring-fence-agents-remediation-operator_fence-agents-remediation-operator-remediate-nodes">FenceAgentsRemediationTemplate must be created</a> to provide BMC connection information for the nodes.
+This is the same information that was used when deploying the cluster and joining nodes using a MachineSet.
+Finally, <a href="https://access.redhat.com/documentation/en-us/workload_availability_for_red_hat_openshift/23.3/html/remediation_fencing_and_maintenance/node-health-check-operator#about-node-health-check-operator_node-health-check-operator">create an instance of the NodeHealthCheck</a> to define appropriate timeout values for your desired VM recovery time.
+Refer to the chart in <a href="https://access.redhat.com/articles/7057929">this KCS</a> for details on how different values affect the recovery times.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_additional_dedicated_network_interfaces_for_traffic_types"><a class="anchor" href="#_additional_dedicated_network_interfaces_for_traffic_types"></a>Additional dedicated network interfaces for traffic types</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The suggested hardware configuration used in this reference architecture has six network adapters configured in three pairs of two LACP bonds.
+The following is a sample NMstate configuration making use of two adapters on the host to create a bonded interface in the LACP (802.1ad) run mode.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  annotations:
+    description: a bond for VM traffic and VLANs
+  name: bonding-policy
+spec:
+  desiredState:
+    interfaces:
+      - link-aggregation:
+          mode: 802.3ad
+          port:
+            - enp6s0f0
+            - enp6s0f1
+        name: bond1
+        state: up
+        type: bond</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The bonds are intended to be used for isolating network traffic for different purposes.
+This provides the advantage of avoiding noisy neighbor scenarios for some interfaces that may have a large impact, for example a backup for a virtual machine consuming significant network throughput impacting ODF or etcd traffic on a shared interface.</p>
+</div>
+<div class="paragraph">
+<p>Management, SDN, and live migration - this is the interface configured during installation, with an IP on the machine network CIDR. OpenShift will configure the SDN on this interface, and it is the interface expected to be used for node-to-control plane communication.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, by default, OpenShift Virtualization uses this interface for live migration traffic.
+This has the benefit of the traffic being encrypted in transit; however, if SDN throughput is constrained, or other workloads would be impacted, then using a different network, such as one shared with the IP-base storage, for live migration traffic.</p>
+</div>
+<div class="paragraph">
+<p>IP-based storage - this is the interface which will be used for two purposes in this reference architecture.
+Using additional isolation, such as VLANs, on this interface is possible, but not required.</p>
+</div>
+<div class="paragraph">
+<p>First, it is the interface expected to be used for mounting iSCSI, NFS, and RBD volumes used by virtual machine disks.
+If the node IPs and the storage system are not in the same broadcast domain (i.e. L2 adjacency) then additional route rules may need to be created using NMstate to ensure that traffic to the storage system utilizes this interface.</p>
+</div>
+<div class="paragraph">
+<p>Second, for deployments using ODF, this is the interface to be used for ODF replication traffic.</p>
+</div>
+<div class="paragraph">
+<p>Virtual machine traffic - this interface will be configured with an OVS bridge to attach virtual machines.
+For each VLAN used by virtual machines, an OVN secondary network NetworkAttachmentDefinition is created using the localnet topology and a VLAN identifier.
+NetworkAttachmentDefinitions are created in the default namespace for use by all other namespaces, or in specific namespaces to provide RBAC controls for network connectivity.</p>
+</div>
+<div class="paragraph">
+<p>An example configuration for VM network connectivity is below, note that the bond configuration should be a part of the same NodeNetworkConfigurationPolicy to ensure they are configured together.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: ovs-br1-vlan-trunk
+spec:
+  nodeSelector:
+    node-role.kubernetes.io/worker: ''
+  desiredState:
+    interfaces:
+    - name: ovs-br1
+      description: |-
+        A dedicated OVS bridge with bond2 as a port
+        allowing all VLANs and untagged traffic
+      type: ovs-bridge
+      state: up
+      bridge:
+        allow-extra-patch-ports: true
+        options:
+          stp: true
+        port:
+        - name: bond2
+    ovn:
+      bridge-mappings:
+      - localnet: vlan-2024
+        bridge: ovs-br1
+        state: present
+      - localnet: vlan-1993
+        bridge: ovs-br1
+        state: present
+---
+apiVersion: k8s.cni.cncf.io/v1
+kind: NetworkAttachmentDefinition
+metadata:
+  annotations:
+    description: VLAN 2024 connection for VMs
+  name: vlan-2024
+  namespace: default
+spec:
+  config: |-
+    {
+      "cniVersion": "0.3.1",
+      "name": "vlan-2024",
+      "type": "ovn-k8s-cni-overlay",
+      "topology": "localnet",
+      "netAttachDefName": "default/vlan-2024",
+      "vlanID": 2024,
+      "ipam": {}
+    }
+---
+apiVersion: k8s.cni.cncf.io/v1
+kind: NetworkAttachmentDefinition
+metadata:
+  annotations:
+    description: VLAN 1993 connection for VMs
+  name: vlan-1993
+  namespace: default
+spec:
+  config: |-
+    {
+      "cniVersion": "0.3.1",
+      "name": "vlan-1993",
+      "type": "ovn-k8s-cni-overlay",
+      "topology": "localnet",
+      "netAttachDefName": "default/vlan-1993",
+      "vlanID": 1993,
+      "ipam": {}
+    }</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_kubelet_configuration"><a class="anchor" href="#_kubelet_configuration"></a>Kubelet configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following additional configuration for kubelet is applied after the cluster is deployed.</p>
+</div>
+<div class="paragraph">
+<p>Increase <a href="https://docs.openshift.com/container-platform/4.15/post_installation_configuration/node-tasks.html#create-a-kubeletconfig-crd-to-edit-kubelet-parameters_post-install-node-tasks">kubelet</a> <strong>kubeAPIBurst</strong> to 200 and <strong>kubeAPIQPS</strong> to 100.
+Adjusting these values up from the default of 100 and 50, respectively, accommodates bulk object creation on the nodes.
+The lower values are useful on clusters with smaller nodes to keep API server resource utilization reasonable, however with larger nodes this is not an issue.</p>
+</div>
+<div class="paragraph">
+<p>Set the <strong>maxPods</strong> per node to 500.
+By default, OpenShift sets the maximum Pods per node to 250.
+This value affects not just the Pods running core OpenShift services and node functions but also virtual machines.
+For large virtualization nodes that can host many virtual machines, this value is likely too small.
+If you’re using very large nodes and may have more than 500 VMs and Pods on a node, this value can be increased beyond 500, however you will also need to adjust the size of the cluster network’s host prefix when deploying the cluster.</p>
+</div>
+<div class="paragraph">
+<p>Disable <strong>nodeStatusMaxImage</strong>.
+The scheduler factors both the count of container images and which container images are on a host when deciding where to place a Pod or virtual machine.
+For large nodes with many different Pods and VMs, this can lead to unnecessary and undesired behavior.
+Disabling the imageLocality scheduler plugin by setting <strong>nodeStatusMaxImage</strong> to <strong>-1</strong> facilitates balanced scheduling across cluster nodes, avoiding scenarios where VMs are scheduled to the same host as a result of the image already being present vs factoring in other resource availability.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://docs.openshift.com/container-platform/4.15/nodes/nodes/nodes-nodes-resources-configuring.html#nodes-nodes-resources-configuring-auto_nodes-nodes-resources-configuring">Set dynamic resource allocation for kubelet</a>.
+The default CPU and memory reservation for kubelet is very small and not appropriate for nodes with large amounts of resources, such as hypervisor hosts.
+Setting dynamic resource allocation will set the values for system reserved CPU and memory according to the total amount of resources on the node.
+This prevents kubelet from starving for resources when the node has high numbers of Pods and virtual machines running.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://docs.openshift.com/container-platform/4.15/scalability_and_performance/using-cpu-manager.html#setting_up_cpu_manager_using-cpu-manager-and-topology_manager">Configure CPU manager</a> to enable dedicated resources for virtual machines to be assigned.
+Without CPU manager, virtual machines using dedicated CPU scheduling, such as those configured with the cx instance type, cannot be scheduled.</p>
+</div>
+<div class="paragraph">
+<p>Configure <a href="https://docs.openshift.com/container-platform/4.15/post_installation_configuration/node-tasks.html#nodes-nodes-garbage-collection-configuring_post-install-node-tasks">soft eviction thresholds</a>.
+Configuring soft eviction is valuable for several reasons, however the most important is that it sets the upper boundary for memory utilization on the nodes before the virtual machines are attempted to be moved to other hosts in the cluster.
+This value should be set for a reasonable value according to the approximate maximum amount of memory utilization you want on the node, however if all nodes are exceeding this value then workload will not be rescheduled.
+Depending on the amount of memory in your hosts, this could be between 90-95%. For the suggested node size in this architecture, a value of 90% is used.
+Additional eviction thresholds for local storage utilization can be configured based on needs, in particular if the disks used by RHCOS are smaller (less than 512GiB) or you intend to deploy ephemeral virtual machines with disks stored in container images.
+Below is an example kubelet configuration to apply the above suggested configuration to compute nodes in the cluster.
+If you have hypervisor hosts that do not have the “worker” label, an additional selector may be needed.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: machineconfiguration.openshift.io/v1
+kind: KubeletConfig
+metadata:
+  name: set-virt-values
+spec:
+  machineConfigPoolSelector:
+    matchLabels:
+      pools.operator.machineconfiguration.openshift.io/worker: ""
+  kubeletConfig:
+    autoSizingReserved: true
+    maxPods: 500
+    nodeStatusMaxImages: -1
+    kubeAPIBurst: 200
+    kubeAPIQPS: 100
+    evictionSoft:
+      memory.available: "50Gi"
+    evictionSoftGracePeriod:
+      memory.available: "5m"
+    evictionPressureTransitionPeriod: 0s</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_openshift_data_foundation_configuration"><a class="anchor" href="#_openshift_data_foundation_configuration"></a>OpenShift Data Foundation configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This reference architecture utilizes ODF as the storage backed for virtual machine disks.
+Storage is modular and additional CSI providers can be added to the cluster to provide both ODF and third-party storage from other vendors.
+Furthermore, ODF is not required if you choose to exclusively use RWX storage from other vendors. For non-ODF storage requirements, see the storage section in next chapter.</p>
+</div>
+<div class="paragraph">
+<p>Set global, and virtualization specific, default storage classes.
+The global default storage class is used as the default for PVCs when a specific storage class is not requested.
+For this reference architecture, when using ODF for the storage, the suggested global default is <strong>ocs-storagecluster-ceph-rbd</strong>.
+The virtualization specific default storage class is used when creating virtual machine disks.
+The default when using ODF should be <strong>ocs-storagecluster-ceph-rbd-virtualization</strong>, unless creating customized storage classes.
+Create additional storage classes as needed to customize the storage features, however ensure that the <strong>parameters.mapOptions value krbd:rxbounce</strong> is set for any ODF storage class used for VM disks.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_multi_network_policy_activation"><a class="anchor" href="#_multi_network_policy_activation"></a>Multi-network policy activation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To support network policy for VMs connected to L2 networks, <a href="https://docs.openshift.com/container-platform/4.15/networking/multiple_networks/configuring-multi-network-policy.html#nw-multi-network-policy-enable_configuring-multi-network-policy">the feature needs to be enabled on the Operator</a>.
+When using network policy to control ingress/egress traffic for virtual machines, use <a href="https://docs.openshift.com/container-platform/4.15/networking/multiple_networks/configuring-multi-network-policy.html#configuring-multi-network-policy_working-with-multi-network-policy">the MultiNetworkPolicy object</a> to define rules for access.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_additional_operator_configuration"><a class="anchor" href="#_additional_operator_configuration"></a>Additional Operator configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The below Operators are suggested to be deployed and configured in the cluster to provide additional functionality.</p>
+</div>
+<div class="paragraph">
+<p>Node maintenance Operator - Simplifies the process of cordoning and draining nodes in the cluster for maintenance purposes.</p>
+</div>
+<div class="paragraph">
+<p>OpenShift logging - Collects the logs of cluster nodes, Pods, and VMs (but not the guest OS logs) into a single place for searching and troubleshooting.</p>
+</div>
+<div class="paragraph">
+<p>MetalLB - Provides the ability to expose Pod and VM-based applications using an L2 or L3 (BGP)-based load balancer hosted by OpenShift.
+This is useful for providing external access to one or more VMs connected to the SDN that are hosting an application using a non-HTTP(s) (and not using ports 80 or 443) application.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://access.redhat.com/documentation/en-us/migration_toolkit_for_virtualization/">Migration Toolkit for Virtualization</a> - In addition to importing virtual machines from Red Hat Virtualization, Red Hat OpenStack, and VMware vSphere to OpenShift, the Migration Toolkit for Virtualization also imports VMs from OVA format and between OpenShift clusters.
+Additionally, virtual machines from other OpenShift Virtualization clusters can be migrated to the current cluster using the migration toolkit.</p>
+</div>
+<div class="paragraph">
+<p>Migration Toolkit for Containers - Used to migrate VM disks (PVCs) between storage classes.</p>
+</div>
+<div class="paragraph">
+<p>Compliance Operator - For organizations with compliance, e.g. HIPAA or DISA STIG, requirements, the Compliance Operator reports, and optionally applies, configuration to the cluster to meet these standards.</p>
+</div>
+<div class="paragraph">
+<p>Kube Descheduler Operator - The descheduler takes action to (re)schedule workload on the cluster nodes when conditions are met. For virtualization, this will take action when nodes are below a utilization threshold, 20% by default, to reschedule VMs from highly utilized nodes, over 50% by default, with the intention of balancing overall node utilization.
+However,  the profile is currently in tech preview.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://docs.openshift.com/container-platform/4.15/scalability_and_performance/cnf-numa-aware-scheduling.html">NUMA resources Operator</a> - As the name implies, this Operator is used when NUMA aware workloads are deployed to the cluster.
+For VMs with large memory requirements or applications that can benefit from NUMA-aware scheduling and utilization of resources, deploying this Operator and assigning the appropriate secondary scheduler informs the nodes how to manage these workloads.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/2.4/html/deploying_the_red_hat_ansible_automation_platform_operator_on_openshift_container_platform/index">Ansible Automation Platform Operator</a> - For pre configuration of network, storage, bare metal resources, DNS, certificates, preparation of VMware clusters and day 2 operations the Ansible Automation platform has validated content that can help customers perform all of these tasks and more to deliver an end to end automated experience.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="section1.html">Cluster Deployment Configuration</a></span>
+  <span class="next"><a href="../chapter5/index.html">Additional Features</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

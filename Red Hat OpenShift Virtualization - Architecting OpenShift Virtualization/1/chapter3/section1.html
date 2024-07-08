@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Red Hat OpenShift Virtualization High-Level Design :: Architecting OpenShift Virtualization</title>
+    <link rel="prev" href="index.html">
+    <link rel="next" href="section2.html">
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">Architecting OpenShift Virtualization</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/architect-the-ocpvirt/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header><div class="body">
+<div class="nav-container" data-component="Red Hat OpenShift Virtualization - Architecting OpenShift Virtualization" data-version="1">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Architecting OpenShift Virtualization</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter1/index.html">Requirements of OpenShift Virtualization for Migration</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section1.html">Review of current VM environment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section2.html">Technical OpenShift Virtualization Questions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section3.html">Current Environment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section4.html">Workload Migration Complexity Analysis</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter2/index.html">Recommended Migration Approach</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/section1.html">Virtualization Migration Assessment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/section2.html">Pilot Foundation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/section3.html">Expand with Migration Factory</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/section4.html">Proof of Technology (PoT) Environment</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Reference Design and Architecture</a>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="section1.html">Red Hat OpenShift Virtualization High-Level Design</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="section2.html">Physical Cluster Design</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="section3.html">Micro Cluster</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="section4.html">Small Cluster</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="section5.html">Medium Cluster</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="section6.html">Large Cluster</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter4/index.html">Reference Implementation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter4/section1.html">Cluster Deployment Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter4/section2.html">Post-install Configuration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter5/index.html">Additional Features</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter5/section1.html">Compute</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter5/section2.html">Network</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter5/section3.html">Storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter5/section4.html">Resource Capacity Calculation</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter6/index.html">OpenShift Virtualization Sizing for Virtual Machines</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section1.html">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section2.html">Raw Capacity Required for Workloads</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section3.html">Decide the Node Size</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section4.html">Adjust for Cluster Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section5.html">Adjust for failover/HA and resource balancing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section6.html">Storage, Network and other special resources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section7.html">Disaster Recovery</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Architecting OpenShift Virtualization</span>
+    <span class="version">1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Architecting OpenShift Virtualization</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Architecting OpenShift Virtualization</a></li>
+    <li><a href="index.html">Reference Design and Architecture</a></li>
+    <li><a href="section1.html">Red Hat OpenShift Virtualization High-Level Design</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Red Hat OpenShift Virtualization High-Level Design</h1>
+<div class="paragraph">
+<p>OpenShift Virtualization uses KVM, the Linux kernel hypervisor, to bring virtual machines as native objects to OpenShift.
+KVM is a core component of the Red Hat Enterprise Linux kernel and has been used in production for 15+ years in other hypervisor products, such as Red Hat Virtualization, Red Hat OpenStack Platform, and Red Hat Enterprise Linux.
+The KVM stack used by OpenShift incorporates the same KVM, QEMU, and libvirt components used by those platforms; OpenShift is a robust, stable, and scalable type-1 hypervisor for virtualization workloads.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/ocpvirt_HLD.png" alt="ocpvirt HLD">
+</div>
+</div>
+<div class="paragraph">
+<p>Virtual machines are deployed and managed using the same scheduler used for non-virtual machine workloads.
+Native features like host affinity, resource awareness, load balancing, and high availability are all inherited from the native OpenShift features for non-virtual machine workloads.</p>
+</div>
+<div class="paragraph">
+<p>Virtual machines connected to the cluster software-defined network (SDN) are accessible using standard Kubernetes methods, including services and routes, while also being subject to controlling traffic using network policy and ingress/egress configuration.
+This provides robust methods for enabling access to virtual machines from inside and outside the cluster, along with platform-level security controls for managing access to VM-hosted applications.</p>
+</div>
+<div class="paragraph">
+<p>For environments like the financial company where the initial focus is migrating virtual machines with minimal changes, OpenShift Virtualization also has full support for directly attaching virtual machine interfaces to VLAN-tagged datacenter networks through bridge networking and optionally SR-IOV virtual function passthrough. This allows for the migration of a virtual machine’s network identity (IP and MAC address) to greatly reduce the risk and effort associated with “lift and shift” style migrations.</p>
+</div>
+<div class="paragraph">
+<p>Because it is a fully-featured application platform and not just a virtualization solution, OpenShift necessarily has more infrastructure overhead than the incumbent vSphere solution. In order to minimize the additional overhead, OpenShift supports a feature called hosted control planes (HCP) which allows for the control plane workloads of multiple OpenShift clusters to run on a shared management cluster (“Foundation” cluster in this design).</p>
+</div>
+<div class="paragraph">
+<p>The proposed data center design for the financial company makes use of HCP to minimize additional overhead and isolate control plane workloads from potential data plane and storage array outages. This design also allows for the financial company to support their current “Two SPOF” or two failure-domain model for workloads in the short term while the foundation cluster has three failure domains. The datacenter can then be easily converted to a “Three SPOF” or three failure-domain model for workloads through scaling operations rather than redeployment of clusters.</p>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="index.html">Reference Design and Architecture</a></span>
+  <span class="next"><a href="section2.html">Physical Cluster Design</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

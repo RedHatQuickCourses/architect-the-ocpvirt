@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Decide the Node Size :: Architecting OpenShift Virtualization</title>
+    <link rel="prev" href="section2.html">
+    <link rel="next" href="section4.html">
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">Architecting OpenShift Virtualization</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/architect-the-ocpvirt/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header><div class="body">
+<div class="nav-container" data-component="Red Hat OpenShift Virtualization - Architecting OpenShift Virtualization" data-version="1">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Architecting OpenShift Virtualization</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter1/index.html">Requirements of OpenShift Virtualization for Migration</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section1.html">Review of current VM environment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section2.html">Technical OpenShift Virtualization Questions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section3.html">Current Environment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section4.html">Workload Migration Complexity Analysis</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter2/index.html">Recommended Migration Approach</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/section1.html">Virtualization Migration Assessment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/section2.html">Pilot Foundation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/section3.html">Expand with Migration Factory</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/section4.html">Proof of Technology (PoT) Environment</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter3/index.html">Reference Design and Architecture</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/section1.html">Red Hat OpenShift Virtualization High-Level Design</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/section2.html">Physical Cluster Design</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/section3.html">Micro Cluster</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/section4.html">Small Cluster</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/section5.html">Medium Cluster</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/section6.html">Large Cluster</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter4/index.html">Reference Implementation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter4/section1.html">Cluster Deployment Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter4/section2.html">Post-install Configuration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter5/index.html">Additional Features</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter5/section1.html">Compute</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter5/section2.html">Network</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter5/section3.html">Storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter5/section4.html">Resource Capacity Calculation</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">OpenShift Virtualization Sizing for Virtual Machines</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="section1.html">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="section2.html">Raw Capacity Required for Workloads</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="section3.html">Decide the Node Size</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="section4.html">Adjust for Cluster Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="section5.html">Adjust for failover/HA and resource balancing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="section6.html">Storage, Network and other special resources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="section7.html">Disaster Recovery</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Architecting OpenShift Virtualization</span>
+    <span class="version">1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Architecting OpenShift Virtualization</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Architecting OpenShift Virtualization</a></li>
+    <li><a href="index.html">OpenShift Virtualization Sizing for Virtual Machines</a></li>
+    <li><a href="section3.html">Decide the Node Size</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Decide the Node Size</h1>
+<div class="paragraph">
+<p>Now we need to determine node size. This includes a lot of factors, but the two that we will focus on are</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>failure domain, which is subjective, and</p>
+</li>
+<li>
+<p>density, which can be driven by max Pod count and/or physical resources.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>For density, we know that the current <a href="https://docs.openshift.com/container-platform/4.15/scalability_and_performance/planning-your-environment-according-to-object-maximums.html#cluster-maximums-major-releases_object-limits">max pod count</a> is <strong>2500</strong>.
+At a minimum this deployment will need 4 nodes to be able to host the VM count.
+This would result in nodes that have <strong>1700 / 4 = 425</strong> VMs each.
+With the average VM size determined above, we see that the hosts would need capacity for at least <strong>2.4 * 425 = 1020 vCPUs</strong> and <strong>12.4 * 425 = 5270 GiB memory</strong>.
+Since we cannot do memory overcommitment, this means that memory becomes the limiting factor for most servers, which means a 4 node cluster is not feasible and, therefore, maximum density / fewest nodes in the cluster is not an optimal choice.</p>
+</div>
+<div class="paragraph">
+<p>Without memory overcommitment, this will almost certainly be the limiting factor for server size.
+If we assume that the typical/average virtualization server has <strong>768 GiB of memory</strong>, then we can determine the max VM count by dividing the total server memory by the average VM memory.
+In this case <strong>768 / 12.4 = 62(ish) VMs</strong> per node.
+This would result in the customer needing <strong>1700 / 62 = 28 (rounded up) nodes</strong> in the cluster based on memory.
+Each of those <strong>28 servers</strong> would need to host <strong>2.4 * 62 = 149 vCPUs</strong>.
+A modest <strong>4:1 CPU overcommit</strong> would result in the servers needing only <strong>38 physical cores</strong> to host the workload.
+A dual socket <strong>22-core server</strong> would have a small amount of unused, or “stranded”, CPU resources in this instance.</p>
+</div>
+<div class="paragraph">
+<p>A secondary factor is to attempt to avoid stranding resources by balancing CPU and memory according to requirements.
+This is as simple as keeping the physical <strong>CPU:memory ratio</strong> inline with the overall requirement - <strong>4000:21000</strong>, which reduces down to <strong>1:5.25</strong>.</p>
+</div>
+<div class="paragraph">
+<p>To balance the ratio, we also need to keep the CPU oversubscription factor in mind when choosing a physical server size.
+Jumping to <strong>2 TiB</strong> of memory per server, we can now host <strong>2048 / 12.4 = 165(ish) VMs</strong> per node based on memory, which would need <strong>396 vCPUs</strong>.
+A dual socket server with <strong>24 cores</strong> per socket would have an overcommit ratio of <strong>396 / (2 * 24) = 8.25:1</strong>.
+This both falls within the expected/allowable <strong>CPU overcommit ratio</strong> for OpenShift Virtualization (<strong>defaults to 10:1</strong>) and is inline with our overall <strong>CPU:memory</strong> ratio at <strong>1:5.17</strong>.</p>
+</div>
+<div class="paragraph">
+<p><strong>165 VMs</strong> per node means our customer would need <strong>11 (actual = 10.3, but you can’t buy .3 of a device) servers</strong>.</p>
+</div>
+<div class="paragraph">
+<p>If we factor in failure domain size, we need to understand the amount of capacity lost when a server goes offline.
+<strong>28 servers</strong> means losing a single server would result in losing just <strong>3.6% of total capacity</strong>.
+<strong>11 servers</strong> means losing a single server would reduce total capacity by approximately <strong>9%</strong>.
+The lost server would also result in <strong>28 or 165 VMs</strong> needing to be rescheduled.
+Is either of these numbers too large of an impact? If so, then we need to adjust the size of the nodes downward to increase node count.
+This is a risk decision that can only be made by the customer.</p>
+</div>
+<div class="paragraph">
+<p>Thus far the above calculation has not taken into account node overhead.
+If we allow the nodes to <a href="https://docs.openshift.com/container-platform/4.15/nodes/nodes/nodes-nodes-resources-configuring.html#nodes-nodes-resources-configuring-auto_nodes-nodes-resources-configuring">automatically configure system</a> and kube reserved resources, then there is <a href="https://github.com/openshift/machine-config-operator/blob/release-4.14/templates/common/_base/files/kubelet-auto-sizing.yaml">a formula to follow</a>.
+For a node with <strong>768 GiB of memory</strong>, <strong>22 GiB</strong> will be reserved for the system. With <strong>2 TiB of memory</strong>, <strong>48 GiB</strong> will be reserved.
+In both instances of a <strong>44 or 48 core server</strong>, the CPU reservation is modest at <strong>.18 and .19 cores</strong> respectively.</p>
+</div>
+<div class="paragraph">
+<p>OpenShift Virtualization itself has node overhead as well.
+This is a negligible <strong>360 MiB memory</strong> and a flat <strong>2 cores per compute node</strong>.</p>
+</div>
+<div class="paragraph">
+<p>These two overheads combined - approximately <strong>2.2 cores</strong> and <strong>22 or 48 GiB memory</strong> per node - may affect the size or density of the nodes.
+In this example, both of our node count estimates were rounded up (27.4 &#8594; 28 and 10.4 &#8594; 11), therefore it is expected that there is enough excess resources to accommodate these overheads already.</p>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="section2.html">Raw Capacity Required for Workloads</a></span>
+  <span class="next"><a href="section4.html">Adjust for Cluster Architecture</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

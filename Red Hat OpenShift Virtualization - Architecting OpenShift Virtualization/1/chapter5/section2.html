@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Network :: Architecting OpenShift Virtualization</title>
+    <link rel="prev" href="section1.html">
+    <link rel="next" href="section3.html">
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">Architecting OpenShift Virtualization</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/architect-the-ocpvirt/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header><div class="body">
+<div class="nav-container" data-component="Red Hat OpenShift Virtualization - Architecting OpenShift Virtualization" data-version="1">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Architecting OpenShift Virtualization</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter1/index.html">Requirements of OpenShift Virtualization for Migration</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section1.html">Review of current VM environment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section2.html">Technical OpenShift Virtualization Questions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section3.html">Current Environment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section4.html">Workload Migration Complexity Analysis</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter2/index.html">Recommended Migration Approach</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/section1.html">Virtualization Migration Assessment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/section2.html">Pilot Foundation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/section3.html">Expand with Migration Factory</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/section4.html">Proof of Technology (PoT) Environment</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter3/index.html">Reference Design and Architecture</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/section1.html">Red Hat OpenShift Virtualization High-Level Design</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/section2.html">Physical Cluster Design</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/section3.html">Micro Cluster</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/section4.html">Small Cluster</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/section5.html">Medium Cluster</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/section6.html">Large Cluster</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter4/index.html">Reference Implementation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter4/section1.html">Cluster Deployment Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter4/section2.html">Post-install Configuration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Additional Features</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="section1.html">Compute</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="section2.html">Network</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="section3.html">Storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="section4.html">Resource Capacity Calculation</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter6/index.html">OpenShift Virtualization Sizing for Virtual Machines</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section1.html">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section2.html">Raw Capacity Required for Workloads</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section3.html">Decide the Node Size</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section4.html">Adjust for Cluster Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section5.html">Adjust for failover/HA and resource balancing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section6.html">Storage, Network and other special resources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter6/section7.html">Disaster Recovery</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Architecting OpenShift Virtualization</span>
+    <span class="version">1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Architecting OpenShift Virtualization</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Architecting OpenShift Virtualization</a></li>
+    <li><a href="index.html">Additional Features</a></li>
+    <li><a href="section2.html">Network</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Network</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>An OpenShift cluster is configured using an overlay software-defined network (SDN) for both the Pod and Service networks.
+By default, VMs are configured with connectivity to the SDN and have the same features/connectivity as Pod-based applications.
+This means they have an internal-only IP address for being accessed across the SDN, with internal DNS resolution provided by creating a Service to abstract access to one or more VMs. On the SDN, the virtual machine can then have a specific service or port exposed through a Route like Pods.
+The Multus Container Network Interface (CNI), which is deployed and used with all OpenShift clusters, enables attaching multiple network interfaces to Pods and VMs, including simultaneous connections to the SDN and one-or-more external (e.g. VLAN) networks.</p>
+</div>
+<div class="paragraph">
+<p>Host-level networking configurations are created and applied using the NMstate operator.
+This includes the ability to report the current configuration options, such as bonds, bridges, and VLAN tags to help segregate networking resources, as well as apply desired-state configuration for those entities.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/Network_bond.png" alt="Network bond">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_software_defined_networking_sdn"><a class="anchor" href="#_software_defined_networking_sdn"></a>Software-Defined Networking (SDN)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As of OpenShift 4.15, the Red Hat-provided SDN option with OpenShift is OVN-Kubernetes.
+OVN-Kubernetes is based on Open Virtual Network (OVN) and provides an overlay-based networking implementation.
+A cluster that uses the OVN-Kubernetes plugin also runs Open vSwitch (OVS) on each node. OVN configures OVS on each node to implement the declared network configuration.</p>
+</div>
+<div class="sect2">
+<h3 id="_additional_sdn_options"><a class="anchor" href="#_additional_sdn_options"></a>Additional SDN Options</h3>
+<div class="paragraph">
+<p>There are many partners, such as Tigera, Cisco, Citrix, and F5, which also have SDN and other network plugins which work with OpenShift Virtualization to bring additional features and capabilities to virtual machines. Confirm with your vendor the capabilities which work with VMs.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_networking_architecture"><a class="anchor" href="#_networking_architecture"></a>Networking Architecture</h3>
+<div class="paragraph">
+<p>By default, OpenShift Virtualization will conduct most communication using the SDN.
+There are two methods primarily for virtual machines or the applications currently running on the cluster to be accessed publicly.
+Like a Pod-based application, a Service can be created, mapped to an open port on the virtual machine, and a Route is used to expose external access to the application. However, this only works for HTTP(s)-based applications using port 80 and/or 443.</p>
+</div>
+<div class="paragraph">
+<p>For other protocols and ports, using a Service with type LoadBalancer, such as MetalLB or one from partners such as F5 and Citrix, enables the application to be publicly accessible without the VM being connected directly to an L2 (VLAN) network.
+Deploying and configuring a load balancer provider is a post-deployment configuration option.
+The recommended option for this reference architecture is to use MetalLB with L3 mode if possible, or L2 mode as a fall back.</p>
+</div>
+<div class="paragraph">
+<p>Furthermore, it is also possible to configure additional network resources to provide access to an external network so that the VM is configured with an IP address which allows the guest operating system to be accessed directly using a remote connectivity protocol like SSH.
+Refer to the section above for <a href="https://docs.google.com/document/d/1ItlaqzBh9EcDqDA__gbpKBQd0MhJO-0_KxqHqnKHS9c/edit#heading=h.6hda99jr4zi4">configuring additional network segments</a> for how to set up this scenario within OpenShift Virtualization.
+<a href="https://access.redhat.com/support/articles/ansible-automation-platform-certified-content">Ansible Automation Platform</a> provides the ability to configure additional settings and scenarios within the guest operating system as well.</p>
+</div>
+<div class="paragraph">
+<p>For more information about network configuration options in OpenShift, please see the documentation available <a href="https://docs.openshift.com/container-platform/4.13/networking/about-networking.html">here</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="section1.html">Compute</a></span>
+  <span class="next"><a href="section3.html">Storage</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
